@@ -24,6 +24,7 @@
 import ProgressBar from "./ProgressBar.vue";
 import Agreement from "./Agreement.vue";
 import Success from "./Success.vue";
+import SWAL from "sweetalert2";
 
 export default {
   components: {
@@ -43,9 +44,21 @@ export default {
     submitForm() {
       this.step = 2;
     },
-    registerUser() {
+    async registerUser() {
       // 實際註冊邏輯
-      this.step = 3;
+      let result = await $fetch("/api/register", {
+        method: "POST",
+        body: {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        },
+      });
+      if (result.code == 200) {
+        this.step = 3;
+      } else {
+        SWAL.fire(`錯誤:${result.code}`);
+      }
     },
   },
 };
