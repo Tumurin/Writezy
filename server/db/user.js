@@ -7,3 +7,7 @@ export const register = async (userData) => {
   //   return "OK"; // 先不要送出，看一下密碼有沒有被雜湊
   return User.create(userData);
 };
+
+export const getUserByEmail = async (email) => {
+  return await User.where("email").equals(email).findOne().exec();
+};

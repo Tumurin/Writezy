@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import SWAL from "sweetalert2";
 export default {
   data() {
     return {
@@ -22,27 +23,23 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      this.step = 2;
-    },
-    registerUser() {
-      // 實際註冊邏輯
-      this.step = 3;
+    async submitForm() {
+      let result = await $fetch("/api/login", {
+        method: "POST",
+        body: {
+          email: this.email,
+          password: this.password,
+        },
+      });
+      if (result.code == 200) {
+        SWAL.fire(`登入成功`);
+        console.log(result);
+        const user = useState("user");
+        user.value = result.access_token;
+      } else {
+        SWAL.fire(`錯誤:${result.code}`);
+      }
     },
   },
 };
 </script>
-
-<style>
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-</style>
