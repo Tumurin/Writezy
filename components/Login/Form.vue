@@ -9,6 +9,10 @@
       <input v-model="password" type="password" class="form-control" required />
     </div>
     <button @click.prevent="submitForm" class="btn btn-primary">Login</button>
+    <!-- 僅在客戶端渲染 -->
+    <ClientOnly>
+      <GoogleLogin :callback="googleLogin" />
+    </ClientOnly>
   </div>
 </template>
 
@@ -39,6 +43,9 @@ export default {
       } else {
         SWAL.fire(`錯誤:${result.code}`);
       }
+    },
+    googleLogin(response) {
+      console.log(response);
     },
   },
 };
