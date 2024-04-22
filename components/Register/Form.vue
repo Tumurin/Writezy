@@ -46,18 +46,26 @@ export default {
     },
     async registerUser() {
       // 實際註冊邏輯
-      let result = await $fetch("/api/register", {
-        method: "POST",
-        body: {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        },
-      });
-      if (result.code == 200) {
-        this.step = 3;
-      } else {
-        SWAL.fire(`錯誤:${result.code}`);
+      try {
+        let result = await $fetch("https://nodejsproject-r94y.onrender.com/register", {
+          method: "POST",
+          body: {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          },
+        });
+        alert(result.message);
+        console.log(result);
+        if (result.status == true) {
+          this.step = 3;
+          SWAL.fire(`結果:${result.message}`);
+        } else {
+          SWAL.fire(`錯誤:${result.code}`);
+        }
+      } catch (e) {
+        console.log(e);
+        SWAL.fire(`錯誤:${e.status}`);
       }
     },
   },
