@@ -68,10 +68,13 @@
         </div>
     </template>
     <div v-if="isLogin" class="mt-3 text-center">
+      <span class="me-3">登入者：{{thisOwner.name}}</span>
+      <button class="btn btn-primary" @click="logout()">登出</button>
       <h3>好友清單</h3>
       <ul class="list-unstyled">
-        <li v-for="(item,index) in thisOwner.friends" :key="index">
+        <li v-for="(item,index) in thisOwner.friends" :key="index" class="mb-3">
           {{ item.name }} <button class="btn btn-primary" v-if="!item.status" @click="confirmFriend(item.id)">確認</button>
+          <button class="btn btn-danger" v-else @click="deleteFriend(item.id)">刪除</button>
         </li>
       </ul>
     </div>
@@ -106,11 +109,16 @@ const login = async()=>{
         })
         thisOwner.value = {...owner.data[0]}
         console.log(thisOwner.value)
-        alert("你已經登入了")
         isLogin.value = true
     }catch(error){
         console.log(error)
     }
+}
+const logout = ()=>{
+  thisOwner.value = null
+  isLogin.value = false
+  emailInput.value = null
+  userName.value = null
 }
 const isLogin = ref(false)
 const thisOwner = ref({})
@@ -136,6 +144,7 @@ const addFriend = async()=>{
   }catch(error){
     console.log(error)
   }
+  getAllUsers()
 }
 const confirmFriend = async(oppoentId)=>{
   const id = thisOwner.value._id
@@ -152,6 +161,24 @@ const confirmFriend = async(oppoentId)=>{
     console.log(error)
   }
   login()
+  getAllUsers()
+}
+const deleteFriend = async(oppoentId)=>{
+  const id = thisOwner.value._id
+  try{
+    const deleteMyFriend = await $fetch(`http://127.0.0.1:3005/relationship/deleteFriend/${id}`,{
+      method:'PATCH',
+      body:{
+        id:oppoentId,
+        myName:thisOwner.value.name
+      }
+    })
+    console.log(deleteMyFriend)
+  }catch(error){
+    console.log(error)
+  }
+  login()
+  getAllUsers()
 }
 const filterUsers = computed(() => {
   const newUsers = users.value.filter((item) => item.name.match(name.value));
