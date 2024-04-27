@@ -29,6 +29,7 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-vue": "^9.23.0",
+    "google-auth-library": "^9.9.0",
     "typescript": "*",
     "vue3-google-login": "^2.0.26"
   }

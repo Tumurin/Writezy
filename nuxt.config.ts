@@ -10,11 +10,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      googleOauthId: process.env.NUXT_PUBLIC_GOOGLE_OAUTH_ID,
+      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
     },
-    googleOauthSecret: process.env.NUXT_GOOGLE_OAUTH_SECRET,
+    googleClientSecret: process.env.NUXT_GOOGLE_CLIENT_SECRET,
     mongodbUri: process.env.NUXT_MONGODB_URI,
     jwtAccessTokenSecret: process.env.NUXT_JWT_ACCESS_TOKEN_SECRET,
     jwtRefreshTokenSecret: process.env.NUXT_JWT_REFRESH_TOKEN_SECRET,
-  }
+  },
 })
