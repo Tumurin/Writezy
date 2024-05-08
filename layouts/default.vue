@@ -33,11 +33,9 @@
   </nav>
 
   <!-- 主要內容 -->
-  <div class="container my-5">
-    <main>
-      <slot />
-    </main>
-  </div>
+  <main>
+    <slot />
+  </main>
 </template>
 
 <script setup></script>
