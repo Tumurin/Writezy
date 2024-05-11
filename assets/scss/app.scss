@@ -1,0 +1,51 @@
+
+/** 1. 引入 functions，才能操控 color, svg, calc... */
+@import 'bootstrap/scss/functions';
+
+/** 2. 自訂變數置於 bootstrap variables 前，覆蓋 bootstrap 變數 */
+@import './custom/spacers';
+@import './custom/variables';
+@import './custom/variables-dark';
+@import './custom/color';
+@import './custom/font';
+
+/** 3. 引入 variables, mixins, root */
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/root';
+
+/** 4. 引入 utilities */
+@import 'bootstrap/scss/utilities';
+
+/** 5. 自訂、擴充、調整 utilities */
+@import './custom/utilities';
+
+/** 6. 引入需要的 bootstrap components */
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/type';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/tables';
+@import 'bootstrap/scss/forms';
+@import 'bootstrap/scss/card';
+@import 'bootstrap/scss/modal';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/close';
+@import 'bootstrap/scss/nav';
+@import 'bootstrap/scss/navbar';
+@import 'bootstrap/scss/progress';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/carousel';
+@import 'bootstrap/scss/transitions';
+@import 'bootstrap/scss/spinners';
+/** ... */
+
+/** 7. 使用 utilities 需引入 utilities api（將 sass map 轉換為 utility classes） */
+@import 'bootstrap/scss/utilities/api';
+
+/** 8. 客製樣式置於最後，覆蓋前面的樣式 */
+@import './custom/button';

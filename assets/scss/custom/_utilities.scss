@@ -1,0 +1,29 @@
+$utilities: map-merge(
+  $utilities,
+  (
+    'font-size': map-merge(
+			map-get($utilities, 'font-size'),
+			(
+				responsive: true
+			)
+		),
+    'viewport-height': map-merge(
+			map-get($utilities, 'viewport-height'),
+			(
+				responsive: true
+			)
+    ),
+    'z-index': map-merge(
+			map-get($utilities, 'z-index'),
+			(
+				responsive: true
+			)
+    ),
+    'cursor': (
+      property: cursor,
+      class: cursor,
+      responsive: true,
+      values: auto pointer grab
+    )
+  )
+);

@@ -1,0 +1,56 @@
+// Noto Sans Traditional Chinese
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+// Poppins
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,700&display=swap');
+
+$font-family-sans-serif:
+  'Noto Sans Traditional Chinese',
+  'Poppins',
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  'Noto Sans',
+  'Liberation Sans',
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji';
+
+// font-size
+$font-size-base: 1rem; // 16
+$font-size-lg: $font-size-base * 4; // 64
+$font-size-sm: $font-size-base * 0.75; // 12
+
+$h1-font-size: $font-size-base * 3; // 48
+$h2-font-size: $font-size-base * 2.25; // 36
+$h3-font-size: $font-size-base * 1.875; // 30
+$h4-font-size: $font-size-base * 1.5; // 24
+$h5-font-size: $font-size-base * 1.25; // 20
+$h6-font-size: $font-size-base * 1.125; // 18
+$h7-font-size: $font-size-base; // 16
+$h8-font-size: $font-size-base * 0.875; // 14
+
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+  7: $h7-font-size,
+  8: $h8-font-size,
+  lg: $font-size-lg,
+  sm: $font-size-sm,
+);
+
+// line-height
+// $line-height-lg: 1.2 !default;
+
+// 文字間距
+// .ls-1 {
+//   letter-spacing: 0.05em;
+// }

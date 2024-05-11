@@ -1,0 +1,100 @@
+// scss-docs-start gray-color-variables
+// gray
+$gray-000: #ffffff !default; // Grey_00
+$gray-100: #ebebed !default; // Grey_01
+$gray-200: #d7d7dc !default; // Grey_02
+$gray-300: #c4c3ca !default; // Grey_03
+$gray-400: #b0afb9 !default; // Grey_04
+$gray-500: #9c9ba7 !default; // Grey_05
+$gray-600: #7f7e88 !default; // Grey_06
+$gray-700: #62626a !default; // Grey_07
+$gray-800: #46454b !default; // Grey_08
+$gray-900: #29292d !default; // Grey_09
+$gray-dark: #0c0c0e !default; // Grey_10
+
+// primary
+$primary-000: #f2ebfb !default; // primary_00
+$primary-100: #e6d7f7 !default; // primary_01
+$primary-200: #cdaeef !default; // primary_02
+$primary-300: #b386e8 !default; // primary_03
+$primary-400: #9a5de0 !default; // primary_04
+$primary-500: #8135d8 !default; // primary_05
+$primary-600: #672aad !default; // primary_06
+$primary-700: #4d2082 !default; // primary_07
+$primary-800: #341556 !default; // primary_08
+$primary-900: #271041 ; // primary_09
+$primary-dark: #1a0b2b !default; // primary_10
+
+// secondary
+$secondary-000: #feefe4 !default; // secondary_00
+$secondary-100: #fce0c9 !default; // secondary_01
+$secondary-200: #fbd0af !default; // secondary_02
+$secondary-300: #f9c194 !default; // secondary_03
+$secondary-400: #f8b179 !default; // secondary_04
+$secondary-500: #d49462 !default; // secondary_05
+$secondary-600: #b1774a !default; // secondary_06
+$secondary-700: #8d5b33 !default; // secondary_07
+$secondary-800: #7b4c27 !default; // secondary_08
+$secondary-900: #6a3e1b !default; // secondary_09
+$secondary-dark: #582f10 !default; // secondary_10
+
+$white: #fff !default;
+$black: #000 !default;
+$light: $white !default;
+$dark: $black !default;
+// scss-docs-end theme-color-variables
+
+// scss-docs-start color-variables
+$blue: #0d6efd !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+// scss-docs-start theme-color-variables
+
+// scss-docs-start theme-colors-map
+$theme-colors: (
+  'grey-00': $gray-000,
+  'grey-01': $gray-100,
+  'grey-02': $gray-200,
+  'grey-03': $gray-300,
+  'grey-04': $gray-400,
+  'grey-05': $gray-500,
+  'grey-06': $gray-600,
+  'grey-07': $gray-700,
+  'grey-08': $gray-800,
+  'grey-09': $gray-900,
+  'grey-10': $gray-dark,
+
+  'primary-00': $primary-000,
+  'primary-01': $primary-100,
+  'primary-02': $primary-200,
+  'primary-03': $primary-300,
+  'primary-04': $primary-400,
+  'primary-05': $primary-500,
+  'primary-06': $primary-600,
+  'primary-07': $primary-700,
+  'primary-08': $primary-800,
+  'primary-09': $primary-900,
+  'primary-10': $primary-dark,
+  
+  'secondary-00': $secondary-000,
+  'secondary-01': $secondary-100,
+  'secondary-02': $secondary-200,
+  'secondary-03': $secondary-300,
+  'secondary-04': $secondary-400,
+  'secondary-05': $secondary-500,
+  'secondary-06': $secondary-600,
+  'secondary-07': $secondary-700,
+  'secondary-08': $secondary-800,
+  'secondary-09': $secondary-900,
+  'secondary-10': $secondary-dark,
+
+  'light': $white,
+  'dark': $black,
+) !default;

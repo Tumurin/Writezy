@@ -1,0 +1,40 @@
+$btn-padding-y: 16px;
+$btn-padding-x: 32px;
+
+.btn.btn-primary {
+  padding: $spacer * 0.5 $spacer;
+  white-space: nowrap;
+  color: $light;
+  border: 0;
+  background-color: $primary-500;
+
+  &:hover {
+    color: $light;
+    background-color: $primary-200;
+  }
+  
+  &:active {
+    color: $light;
+    background-color: $primary-700;
+  }
+}
+
+.btn.btn-outline-primary {
+  padding: $spacer * 0.5 $spacer;
+  white-space: nowrap;
+  color: $dark;
+  background-color: $light;
+  border: solid 1px $primary-500;
+
+  &:hover {
+    color: $light;
+    border-color: $primary-500;
+    background-color: $primary-200;
+  }
+  
+  &:active {
+    color: $light;
+    border-color: $primary-700;
+    background-color: $primary-500;
+  }
+}
