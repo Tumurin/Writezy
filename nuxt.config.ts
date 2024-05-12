@@ -2,8 +2,17 @@ import { defineNuxtConfig } from 'nuxt/config'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ["bootstrap/dist/css/bootstrap.min.css"],
   vite: {
+    css: { // 定義全域共用 Sass / SCSS 變數
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @import "@/assets/scss/custom/_color.scss";
+            @import "@/assets/scss/stylesheets/_variables.scss";
+          `
+        }
+      }
+    },
     define: {
       "process.env.DEBUG": false,
     },
@@ -16,5 +25,12 @@ export default defineNuxtConfig({
     mongodbUri: process.env.NUXT_MONGODB_URI,
     jwtAccessTokenSecret: process.env.NUXT_JWT_ACCESS_TOKEN_SECRET,
     jwtRefreshTokenSecret: process.env.NUXT_JWT_REFRESH_TOKEN_SECRET,
-  }
+  },
+  css: ["@/assets/scss/app.scss"],
+  postcss: { // CSS 屬性加上瀏覽器相容性前綴
+    plugins: {
+        autoprefixer: true
+    }
+  },
+
 })
