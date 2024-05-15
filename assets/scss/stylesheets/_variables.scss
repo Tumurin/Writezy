@@ -1,3 +1,43 @@
 $duration-150: 150ms; // btn, radio
 $duration-300: 300ms; // select
 $duration-450: 450ms; // page, modal
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// 垂直螢幕手機，小於 576px
+@mixin sm {
+  @media (max-width: 575.98px) {
+    @content;
+  }
+}
+
+// 橫屏手機，小於768px
+@mixin md {
+  @media (max-width: 767.98px) {
+    @content;
+  }
+}
+
+// 平板電腦，小於 992px
+@mixin lg {
+  @media (max-width: 991.98px) {
+    @content;
+  }
+}
+
+// 桌上型電腦，小於 1200px
+@mixin xl {
+  @media (max-width: 1199.98px) {
+    @content;
+  }
+}
+
+// 大型桌面，小於 1400px
+@mixin xxl {
+  @media (max-width: 1399.98px) {
+    @content;
+  }
+}

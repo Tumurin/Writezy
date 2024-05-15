@@ -38,3 +38,27 @@ $btn-padding-x: 32px;
     background-color: $primary-500;
   }
 }
+
+.btn-xs {
+  width: 40px;
+  height: 40px;
+}
+
+.btn.btn-flat {
+  padding: $spacer * 0.5 $spacer;
+  white-space: nowrap;
+  color: $dark;
+  border: 0;
+  background-color: $light;
+
+  &:hover {
+    color: $light;
+    background-color: $primary-200;
+  }
+  
+  &:active {
+    color: $light;
+    background-color: $primary-700;
+  }
+}
+
