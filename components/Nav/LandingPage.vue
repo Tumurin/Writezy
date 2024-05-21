@@ -4,8 +4,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <UILogo></UILogo>
-        消息 通知
-        <UIAvatar></UIAvatar>
+        <Menu></Menu>
       </div>
     </nav>
   </div>
