@@ -74,5 +74,7 @@
   </div>
   <br/>
   <ButtonOutlinedPhoto></ButtonOutlinedPhoto>
-  <CardThree></CardThree>
+  <CardStraight></CardStraight>
+  <CardHorizontal></CardHorizontal>
+  <CardIntroduce></CardIntroduce>
 </template>
