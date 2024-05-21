@@ -17,9 +17,15 @@ import people from "~/assets/img/people.png";
   width: 38rem;
 }
 
-@include md {
+@include xl {
   .card-wrapper {
     width: 21.9375rem;
+  }
+}
+
+@include sm {
+  .card-wrapper {
+    width: 100%;
   }
 }
 </style>

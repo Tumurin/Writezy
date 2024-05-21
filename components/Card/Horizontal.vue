@@ -1,5 +1,5 @@
 <template>
-  <div class="card-wrapper d-flex flex-column flex-lg-row">
+  <div class="card-wrapper d-flex flex-column flex-xl-row">
     <div class="card p-0">
       <img :src="rectangle" alt="Google最新AI">
     </div>
@@ -21,9 +21,15 @@ import rectangle from "~/assets/img/rectangle.png";
   width: 81rem;
 }
 
-@include lg {
+@include xl {
   .card-wrapper {
     width: 21.9375rem;
+  }
+}
+
+@include sm {
+  .card-wrapper {
+    width: 100%;
   }
 }
 </style>
