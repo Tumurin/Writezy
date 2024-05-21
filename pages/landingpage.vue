@@ -255,3 +255,9 @@
   height: 100vh;
 }
 </style>
+
+<script setup>
+definePageMeta({
+  layout: "landing",
+});
+</script>
