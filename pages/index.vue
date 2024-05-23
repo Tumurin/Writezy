@@ -5,6 +5,22 @@
       <!-- 左側欄位 -->
       <div class="col-lg-3 bg-primary-02">
         <div class="sticky-top">
+          <Folder
+            folderName="我的收藏"
+            :items="[
+              { id: 1, name: '收藏項目1', type: 'file' },
+              { id: 2, name: '收藏項目2', type: 'file' },
+              {
+                id: 3,
+                name: '子資料夾',
+                type: 'folder',
+                children: [
+                  { id: 4, name: '子資料夾項目1', type: 'file' },
+                  { id: 5, name: '子資料夾項目2', type: 'file' },
+                ],
+              },
+            ]"
+          ></Folder>
           <h4>功能連結</h4>
           <div class="nav flex-column">
             <a class="nav-link active" aria-current="page" href="#">首頁</a>
