@@ -9,9 +9,6 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-import { defineProps } from "vue";
-
 // 傳入 用戶頭相 Url & 用戶 ID
 const props = defineProps({
   avatarUrl: {
@@ -24,7 +21,7 @@ const props = defineProps({
   },
 });
 
-const placeholderUrl = "https://via.placeholder.com/50";
+const placeholderUrl = "https://placehold.co/50x50/EEE/31343C";
 
 const router = useRouter();
 

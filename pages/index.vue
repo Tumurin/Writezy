@@ -5,10 +5,10 @@
         <!-- 左側欄位 -->
         <div class="sticky-top">
           <Folder
-            folderName="我的收藏"
+            folderName="我的標籤"
             :items="[
-              { id: 1, name: '收藏項目1', type: 'file' },
-              { id: 2, name: '收藏項目2', type: 'file' },
+              { id: 1, name: '標籤1', type: 'file' },
+              { id: 2, name: '標籤2', type: 'file' },
               {
                 id: 3,
                 name: '子資料夾',
@@ -20,13 +20,14 @@
               },
             ]"
           ></Folder>
-          <h4>功能連結</h4>
-          <div class="nav flex-column">
-            <a class="nav-link active" aria-current="page" href="#">首頁</a>
-            <a class="nav-link" href="#">設定</a>
-            <a class="nav-link" href="#">訊息</a>
-            <a class="nav-link" href="#">通知</a>
-          </div>
+          <hr />
+          <Folder
+            folderName="我的收藏"
+            :items="[
+              { id: 1, name: '收藏項目1', type: 'file' },
+              { id: 2, name: '收藏項目2', type: 'file' },
+            ]"
+          ></Folder>
         </div>
       </div>
       <div class="col-md-6">
@@ -43,14 +44,9 @@
       <div class="col-md-3">
         <!-- 右側資訊卡 -->
         <div class="sticky-top">
-          <h4>我的社團</h4>
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">社團名稱</h5>
-              <p class="card-text">社團簡介</p>
-            </div>
-          </div>
-          <!-- 其他卡片 -->
+          <List name="好友" :items="friends" />
+          <hr />
+          <List name="社團" :items="clubs" />
         </div>
       </div>
     </div>
@@ -69,6 +65,17 @@ const posts = [
   { id: 2, title: "Post Title 2", content: "Post content 2" },
   { id: 2, title: "Post Title 2", content: "Post content 2" },
 ];
+// 好友列表數據
+const friends = [
+  { id: 1, avatarUrl: "https://placehold.co/32", name: "好友1" },
+  { id: 2, avatarUrl: "https://placehold.co/32", name: "好友2" },
+];
+
+// 社團列表數據
+const clubs = [
+  { id: 1, avatarUrl: "https://placehold.co/32", name: "社團1" },
+  { id: 2, avatarUrl: "https://placehold.co/32", name: "社團2" },
+];
 
 function post() {
   console.log("按送出");
@@ -77,7 +84,8 @@ function post() {
 
 <style>
 .sticky-top {
-  top: 20px;
+  /* 以 nav 高度下去貼齊 */
+  top: 67px;
   position: sticky;
 }
 </style>

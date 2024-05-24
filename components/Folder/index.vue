@@ -1,6 +1,6 @@
 <template>
   <!-- 資料夾元件 -->
-  <div class="folder">
+  <div class="p-2">
     <!-- 資料夾標題，點擊時切換展開/折疊狀態 -->
     <div class="d-flex justify-content-between">
       <div class="folder-header" @click="toggleFolder">
@@ -26,7 +26,6 @@
             v-if="item.type === 'folder'"
             :folderName="item.name"
             :items="item.children"
-            class="mt-2"
           />
           <!-- 若項目是標籤，直接顯示標籤名稱 -->
           <TagOrange v-else class="my-1">#{{ item.name }}</TagOrange>
