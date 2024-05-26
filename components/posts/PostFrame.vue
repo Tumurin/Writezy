@@ -1,16 +1,10 @@
 <template>
-  <div class="frame border border-1 align-items-center p-2">
-    <div
-      class="content-frame d-flex justify-content-between align-items-center"
-    >
-      <div
-        class="avatar-name d-flex justify-content-between align-items-center"
-      >
+  <div class="frame align-items-center p-2">
+    <div class="content-frame d-flex justify-content-between align-items-center">
+      <div class="avatar-name d-flex justify-content-between align-items-center">
         <div class="avatar rounded-circle"></div>
         <div class="ms-3">
-          <span class="name d-block"
-            >林小明 <span class="ms-3 date">3月16日 18:03</span></span
-          >
+          <span class="name d-block">林小明 <span class="ms-3 date">3月16日 18:03</span></span>
           <span class="nick-name d-block">汽車銷售員</span>
         </div>
       </div>
@@ -27,9 +21,7 @@
         />
       </svg>
     </div>
-    <div
-      class="row mt-3 content"
-    >
+    <div class="row mt-3 content">
       <div class="text-frame" :class="{'col-lg-8':isImage}" :style="{ 'max-height': showContent ? '100%':''}">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quod
         perferendis soluta asperiores exercitationem fugiat, illum consequatur
@@ -130,7 +122,7 @@ const isImage = ref(true);
 <style scoped>
 .frame {
   max-width: 700px;
-  height: 100%;
+  /* height: 100%; */
 }
 .content-frame {
   width: 100%;

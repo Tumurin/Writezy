@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <form class="form-signin" autocomplete="off">
+  <div class="container d-flex ">
+    <form class="form-signin wrapper m-auto" autocomplete="off">
       <div class="input-group-clear" style="position:relative">
         <input type="text" id="username" v-model="inputValue" class="form-control" required autofocus>
           <div v-show="!inputValue">
@@ -27,6 +27,11 @@ const clearInput = () => {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  max-width: 25.9375rem;
+  width: 100%;
+}
+
 input:disabled  {
   border-color: $gray-200;
   background-color: $gray-000;

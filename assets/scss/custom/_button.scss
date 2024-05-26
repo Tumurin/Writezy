@@ -56,7 +56,7 @@ $btn-padding-x: 32px;
     background-color: $primary-200;
   }
   
-  &:active {
+  &:active, &:focus {
     color: $light;
     background-color: $primary-700;
   }
