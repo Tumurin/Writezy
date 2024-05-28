@@ -3,8 +3,7 @@
 // Poppins
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,700&display=swap');
 
-$font-family-sans-serif:
-  'Noto Sans Traditional Chinese',
+$font-family-sans-serif: 'Noto Sans Traditional Chinese',
   'Poppins',
   system-ui,
   -apple-system,
@@ -54,4 +53,13 @@ $font-sizes: (
 
 .fw-400 {
   font-weight: 400;
+}
+
+// font-family
+.noto {
+  font-family: 'Noto Sans Traditional Chinese' !important;
+}
+
+.poppins {
+  font-family: 'Poppins' !important;
 }

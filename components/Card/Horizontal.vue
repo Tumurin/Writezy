@@ -1,20 +1,22 @@
 <template>
   <div class="card-wrapper d-flex flex-column flex-xl-row">
-    <div class="card p-0">
-      <img :src="rectangle" alt="Google最新AI">
+    <div class="card border-0 p-0 w-50">
+      <slot name="img" class="card-img-top"></slot>
     </div>
-    <div class="card">
-      <div class="card-body px-2 px-lg-5 d-flex flex-column justify-content-center align-items-center">
-        <h2 class="card-title fw-700">Google最新AI</h2>
-        <h5 class="card-text fw-400">透過最新 Gemini AI技術，自動幫貼文打上標籤，進行分類 。創作者只須隨心書寫。</h5>
+    <div class="card border-0 w-50">
+      <div
+        class="card-body p-0 ps-2 ps-lg-5 ms-2 d-flex flex-column justify-content-center"
+      >
+        <h3 class="card-title text-start fw-700 mb-4">
+          <slot name="title"></slot>
+        </h3>
+        <p class="card-text text-start fw-400">
+          <slot name="content"></slot>
+        </p>
       </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import rectangle from "~/assets/img/rectangle.png";
-</script>
 
 <style lang="scss" scoped>
 .card-wrapper {
