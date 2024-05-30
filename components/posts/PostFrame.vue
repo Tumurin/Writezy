@@ -1,5 +1,5 @@
 <template>
-  <div class="frame border border-1 align-items-center p-2">
+  <div class="frame border border-0 align-items-center p-2">
     <div
       class="content-frame d-flex justify-content-between align-items-center"
     >
