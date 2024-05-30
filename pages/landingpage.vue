@@ -185,7 +185,18 @@
           ></CardIntroduce
         >
         <!-- 麥口 -->
-        <CardIntroduce class="me-3"></CardIntroduce>
+        <CardIntroduce class="me-3">
+          <template #img>
+            <img src="~/assets/img/landingPage/engineermike.jpg" alt="麥口的大頭照" />
+          </template>
+          <template #name> 麥口 </template>
+          <template #tags>
+            <TagOrange>#雜魚工程師</TagOrange>
+          </template>
+          <template #description>
+            還在學習後端路上載浮載沉的雜魚一條。
+          </template>
+        </CardIntroduce>
         <!-- 寬寬 -->
         <CardIntroduce class="me-3">
           <template #img>
