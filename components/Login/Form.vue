@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     async submitForm() {
-      let result = await $fetch("https://nodejsproject-r94y.onrender.com/register", {
+      let result = await $fetch("https://nodejsproject-r94y.onrender.com/login", {
         method: "POST",
         body: {
           email: this.email,
