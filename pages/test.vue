@@ -77,9 +77,6 @@
   <CardStraight></CardStraight>
   <CardHorizontal></CardHorizontal>
   <CardIntroduce></CardIntroduce>
-
-  <!-- 中間瀑布流式貼文 -->
-  <!-- <div class="col-lg-8 border">
     發文區
     <div class="middle-wrapper d-flex">
       <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>

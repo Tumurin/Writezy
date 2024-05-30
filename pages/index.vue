@@ -3,8 +3,8 @@
   <div class="container-lg container-fluid">
     <div class="row">
       <!-- 左側欄位 -->
-      <div class="col-lg-3 bg-primary-02">
-        <div class="sticky-top">
+      <div class="col-lg-3">
+        <div class="d-none d-lg-block sticky-top">
           <Folder
             folderName="我的標籤"
             :items="[
@@ -13,6 +13,22 @@
               {
                 id: 3,
                 name: '子資料夾',
+                type: 'folder',
+                children: [
+                  { id: 4, name: '子資料夾項目1', type: 'file' },
+                  { id: 5, name: '子資料夾項目2', type: 'file' },
+                ],
+              },
+            ]"
+          ></Folder>
+          <Folder
+            folderName="程式開發"
+            :items="[
+              { id: 1, name: '標籤1', type: 'file' },
+              { id: 2, name: '標籤2', type: 'file' },
+              {
+                id: 3,
+                name: '前端',
                 type: 'folder',
                 children: [
                   { id: 4, name: '子資料夾項目1', type: 'file' },
@@ -33,7 +49,7 @@
       </div>
 
       <!-- 中間瀑布流式貼文 -->
-      <div class="col-lg-6 border">
+      <div class="col-12 col-lg-6 border">
         <div class="middle-wrapper d-flex">
           <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
           <input type="text" class="form-control" placeholder="發布心情..." />
@@ -44,9 +60,10 @@
         <div class="horizontal-line-grey my-3"></div>
 
       </div>
-      <div class="col-md-3">
-        <!-- 右側資訊卡 -->
-        <div class="sticky-top">
+
+      <!-- 右側資訊卡 -->
+      <div class="col-lg-3">
+        <div class="d-none d-lg-block">
           <List name="好友" :items="friends" />
           <hr />
           <List name="社團" :items="clubs" />

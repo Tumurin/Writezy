@@ -120,10 +120,10 @@ const showContent = ref(false);
 const isImage = ref(true);
 </script>
 <style scoped>
-.frame {
+/* .frame {
   max-width: 700px;
-  /* height: 100%; */
-}
+  height: 100%;
+} */
 .content-frame {
   width: 100%;
 }

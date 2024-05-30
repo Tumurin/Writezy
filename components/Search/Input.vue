@@ -28,7 +28,7 @@ const clearInput = () => {
 
 <style lang="scss" scoped>
 .wrapper {
-  max-width: 25.9375rem;
+  // max-width: 25.9375rem;
   width: 100%;
 }
 
