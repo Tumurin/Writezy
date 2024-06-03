@@ -1,4 +1,4 @@
-import { register } from "~/server/db/user";
+import { register } from "~/server/db/users";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);

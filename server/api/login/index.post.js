@@ -1,4 +1,4 @@
-import { getUserByEmail } from "~/server/db/user";
+import { getUserByEmail } from "~/server/db/users";
 import { storeRefreshToken } from "~/server/db/refreshTokens";
 
 import { generateTokens } from "~/server/utils/jwt";
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
   });
 
   return {
-    code: 200,
+    statusCode: 200,
     access_token: accessToken,
   };
 });

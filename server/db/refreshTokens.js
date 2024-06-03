@@ -6,3 +6,13 @@ export const storeRefreshToken = async (token, userId) => {
     userId: userId,
   });
 };
+
+export const getRefreshToken = async (token) => {
+  return await RefreshToken.findOne({ token: token }).exec();
+}
+
+export const removeRefreshToken = async (token) => {
+  return await RefreshToken.deleteOne({
+    token: token
+  }).exec();
+}

@@ -15,9 +15,14 @@
             <ButtonFlatNotification class="d-none d-lg-block"></ButtonFlatNotification>
             <UIAvatar class="d-none d-lg-block" userId="abcd1234"></UIAvatar>
             <ButtonFilledBergurMenu class="d-lg-none"></ButtonFilledBergurMenu>
+            {{ userInfo }}
           </div>
         </div>
       </nav>
     </div>
   </div>
 </template>
+
+<script setup>
+const userInfo = useAuthUser();
+</script>

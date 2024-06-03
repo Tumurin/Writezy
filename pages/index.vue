@@ -54,6 +54,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: "auth",
+});
+
 const posts = [
   { id: 1, title: "Post Title 1", content: "Post content 1" },
   { id: 2, title: "Post Title 2", content: "Post content 2" },

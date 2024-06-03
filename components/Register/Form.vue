@@ -1,73 +1,75 @@
 <!-- RegistrationForm.vue -->
 <template>
-  <ProgressBar :currentStep="step" :totalSteps="3" />
-  <div v-if="step === 1" class="registration-form">
-    <div class="form-group">
-      <label>Name</label>
-      <input v-model="name" type="text" class="form-control" required />
+  <div class="container">
+    <div class="card mt-5 w-50 mx-auto">
+      <div class="card-header">註冊</div>
+      <div class="card-body">
+        <div v-if="step === 1" class="registration-form">
+          <div class="form-group">
+            <label>Name</label>
+            <input v-model="name" type="text" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input v-model="email" type="email" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input v-model="password" type="password" class="form-control" required />
+          </div>
+          <div class="d-flex flex-row-reverse p-2">
+            <button @click.prevent="submitForm" class="btn btn-primary mx-auto">
+              Register
+            </button>
+          </div>
+        </div>
+        <!-- 是否同意使用條款，同意後送出註冊請求 -->
+        <RegisterAgreement
+          v-else-if="step === 2"
+          @agreed="registerUser"
+          @declined="step = 1"
+        />
+        <RegisterSuccess v-else-if="step === 3" />
+      </div>
     </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input v-model="email" type="email" class="form-control" required />
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input v-model="password" type="password" class="form-control" required />
-    </div>
-    <button @click.prevent="submitForm" class="btn btn-primary">Register</button>
+    <RegisterProgressBar class="w-50 mx-auto my-2" :currentStep="step" :totalSteps="3" />
   </div>
-  <Agreement v-else-if="step === 2" @agreed="registerUser" @declined="step = 1" />
-  <Success v-else-if="step === 3" />
 </template>
 
-<script>
-import ProgressBar from "./ProgressBar.vue";
-import Agreement from "./Agreement.vue";
-import Success from "./Success.vue";
+<script setup>
 import SWAL from "sweetalert2";
 
-export default {
-  components: {
-    ProgressBar,
-    Agreement,
-    Success,
-  },
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-      step: 1,
-    };
-  },
-  methods: {
-    submitForm() {
-      this.step = 2;
-    },
-    async registerUser() {
-      // 實際註冊邏輯
-      try {
-        let result = await $fetch("https://nodejsproject-r94y.onrender.com/register", {
-          method: "POST",
-          body: {
-            name: this.name,
-            email: this.email,
-            password: this.password,
-          },
-        });
-        alert(result.message);
-        console.log(result);
-        if (result.status == true) {
-          this.step = 3;
-          SWAL.fire(`結果:${result.message}`);
-        } else {
-          SWAL.fire(`錯誤:${result.code}`);
-        }
-      } catch (e) {
-        console.log(e);
-        SWAL.fire(`錯誤:${e.status}`);
-      }
-    },
-  },
-};
+const name = ref("");
+const email = ref("");
+const password = ref("");
+const step = ref(1);
+
+function submitForm() {
+  step.value = 2;
+}
+async function registerUser() {
+  // 實際註冊邏輯
+  try {
+    let result = await $fetch("/api/register", {
+      method: "POST",
+      body: {
+        name: name.value,
+        email: email.value,
+        password: password.value,
+      },
+    });
+
+    alert(result.message);
+    console.log(result);
+    if (result.status == true) {
+      step.value = 3;
+      SWAL.fire(`結果:${result.message}`);
+    } else {
+      SWAL.fire(`錯誤:${result.code}`);
+    }
+  } catch (e) {
+    console.log(e);
+    SWAL.fire(`錯誤:${e.status}`);
+  }
+}
 </script>
