@@ -1,11 +1,7 @@
 <template>
-  <div class="frame border border-0 align-items-center p-2">
-    <div
-      class="content-frame d-flex justify-content-between align-items-center"
-    >
-      <div
-        class="avatar-name d-flex justify-content-between align-items-center"
-      >
+  <div class="frame align-items-center p-2">
+    <div class="content-frame d-flex justify-content-between align-items-center">
+      <div class="avatar-name d-flex justify-content-between align-items-center">
         <div class="avatar rounded-circle"></div>
         <div class="ms-3">
           <span class="name d-block"
@@ -27,17 +23,18 @@
         />
       </svg>
     </div>
-    <div
-      class="row mt-3 content"
-    >
-      <div class="text-frame" :class="{'col-lg-8':isImage}" :style="{ 'max-height': showContent ? '100%':''}">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quod
-        perferendis soluta asperiores exercitationem fugiat, illum consequatur
-        nam accusamus beatae vel quaerat repudiandae earum laboriosam pariatur,
-        molestias vitae hic eligendi. Lorem ipsum dolor sit amet consectetur,
-        adipisicing elit. Maiores, ad id inventore, neque velit nemo sapiente
-        deserunt excepturi minima, dolores recusandae blanditiis perspiciatis.
-        Reiciendis expedita hic porro eligendi illum qui!
+    <div class="row mt-3 content">
+      <div
+        class="text-frame"
+        :class="{ 'col-lg-8': isImage }"
+        :style="{ 'max-height': showContent ? '100%' : '' }"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quod perferendis
+        soluta asperiores exercitationem fugiat, illum consequatur nam accusamus beatae
+        vel quaerat repudiandae earum laboriosam pariatur, molestias vitae hic eligendi.
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, ad id
+        inventore, neque velit nemo sapiente deserunt excepturi minima, dolores recusandae
+        blanditiis perspiciatis. Reiciendis expedita hic porro eligendi illum qui!
       </div>
       <div class="col-lg-4" v-if="isImage">
         <img
@@ -128,10 +125,10 @@ const showContent = ref(false);
 const isImage = ref(true);
 </script>
 <style scoped>
-.frame {
+/* .frame {
   max-width: 700px;
   height: 100%;
-}
+} */
 .content-frame {
   width: 100%;
 }
@@ -156,14 +153,14 @@ img {
 .nick-name {
   font-size: 14px;
 }
-.text-frame{
-    max-height: 150px;
-    overflow-y: hidden;
+.text-frame {
+  max-height: 150px;
+  overflow-y: hidden;
 }
 @media (max-width: 992px) {
-    .text-frame{
-        max-height: 50px;
-        margin-bottom: 30px;
-    }
+  .text-frame {
+    max-height: 50px;
+    margin-bottom: 30px;
+  }
 }
 </style>

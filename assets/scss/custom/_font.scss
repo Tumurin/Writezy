@@ -34,6 +34,7 @@ $h7-font-size: $font-size-base; // 16
 $h8-font-size: $font-size-base * 0.875; // 14
 
 $font-sizes: (
+  0: $font-size-base,
   1: $h1-font-size,
   2: $h2-font-size,
   3: $h3-font-size,
@@ -47,6 +48,9 @@ $font-sizes: (
 );
 
 // font-weight
+.fw-0 {
+  font-weight: normal;
+}
 .fw-700 {
   font-weight: 700;
 }

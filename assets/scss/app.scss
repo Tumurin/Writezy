@@ -8,6 +8,7 @@
 @import './custom/variables-dark';
 @import './custom/color';
 @import './custom/font';
+@import './custom/dropdown';
 
 /** 3. 引入 variables, mixins, root */
 @import 'bootstrap/scss/variables';
@@ -44,6 +45,7 @@
 @import 'bootstrap/scss/spinners';
 @import 'bootstrap/scss/forms/input-group.scss';
 @import 'bootstrap/scss/badge';
+@import 'bootstrap/scss/offcanvas';
 /** ... */
 
 /** 7. 使用 utilities 需引入 utilities api（將 sass map 轉換為 utility classes） */

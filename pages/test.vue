@@ -79,4 +79,79 @@
   <CardStraight></CardStraight>
   <CardHorizontal></CardHorizontal>
   <CardIntroduce></CardIntroduce>
+  發文區
+  <div class="middle-wrapper d-flex">
+    <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
+    <input type="text" class="form-control" placeholder="發布心情..." />
+  </div>
+  <div class="horizontal-line-grey my-3"></div>
+  貼文串
+  <div class="bg-xc" v-for="post in posts" :key="post.id">
+    <div class="row mx-0 mb-3">
+      頭像、姓名、發文日期
+      <div class="col-11 d-flex">
+        <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
+        <div>
+          <p class="mb-0 fw-700">
+            林小明<span class="ms-3 fw-0 text-grey-04">3月16日 18:03</span>
+          </p>
+          <p class="mb-0 fw-400 fs-8 text-grey-08">汽車維修員</p>
+        </div>
+      </div>
+      ... 編輯按鈕
+      <div class="col-1 d-flex justify-content-end">
+        <Icon name="material-symbols:more-horiz" />
+      </div>
+    </div>
+    內容、照片或影片
+    <div class="row mx-0 d-flex justify-content-between">
+      <div v-if="post.pic">
+        <div class="col-7">
+          <p class="mb-0 multiline-ellipsis" style="margin-left: 3.5rem">
+            {{ post.content }}
+          </p>
+        </div>
+        <div class="col-5">
+          <img :src="post.pic" alt="" />
+        </div>
+      </div>
+
+      <div v-else-if="post.video">
+        <div class="col-12">
+          <p class="mb-0 multiline-ellipsis" style="margin-left: 3.5rem">
+            {{ post.content }}
+          </p>
+        </div>
+        <div class="col-12">{{ post.video }}</div>
+      </div>
+
+      <div v-else></div>
+    </div>
+    <div class="d-flex justify-content-center mb-3">
+      <button type="button" class="btn">看更多</button>
+    </div>
+    按讚、留言..區塊
+    <div class="row mx-0 like-margin">
+      <div class="col-11">
+        <span class="me-3">
+          <Icon name="carbon:thumbs-up" class="fs-6 me-2" />
+          <span>99</span>
+        </span>
+        <span class="me-3">
+          <Icon name="octicon:comment-24" class="fs-6 me-2" />
+          <span>99</span>
+        </span>
+        <span>
+          <Icon name="basil:share-outline" class="fs-6 me-2" />
+          <span>99</span>
+        </span>
+      </div>
+      <div class="col-1 d-flex justify-content-end">
+        <span>
+          <Icon name="bi:bookmark" class="fs-6" />
+        </span>
+      </div>
+    </div>
+    <div class="horizontal-line-grey my-3"></div>
+  </div>
 </template>

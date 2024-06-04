@@ -5,7 +5,7 @@
         <b>{{ name }}</b>
       </h6>
       <!-- 全部好友點開應該出現一個 modal (TODO) -->
-      <a>全部{{ name }}</a>
+      <ModalFriends :modalName="name"></ModalFriends>
     </div>
     <div class="">
       <ListItem
