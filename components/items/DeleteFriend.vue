@@ -8,10 +8,18 @@
                     <span class="nick-name d-block">稱號</span>
                 </div>
             </div>
-            <img src="../../assets/img/deletefriend.png" alt="">
+            <a type="button" @click.prevent="openModal()">
+                <img src="../../assets/img/deletefriend.png" alt="">
+            </a>
         </div>
     </div>
 </template>
+<script setup>
+const emits = defineEmits(['deleteConfirm'])
+const openModal = ()=>{
+    emits('deleteConfirm')
+}
+</script>
 <style scoped>
 .frame{
     width: 240px;
