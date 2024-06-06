@@ -30,11 +30,7 @@
                       aria-expanded="false"
                       data-bs-auto-close="false"
                     >
-                      <img
-                        :src="placeholderUrl"
-                        alt="User Avatar"
-                        class="avatar-img rounded-circle"
-                      />
+                      <UIAvatar userId="abcd1234"></UIAvatar>
                     </button>
                     <ul class="avatar-wrapper dropdown-menu dropdown-menu-end">
                       <li>
@@ -450,7 +446,6 @@
 
 <script setup>
 const userInfo = useAuthUser();
-const placeholderUrl = "https://via.placeholder.com/40";
 </script>
 
 <style lang="scss" scoped>

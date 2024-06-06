@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@vee-validate/nuxt':
+        specifier: ^4.13.0
+        version: 4.13.1(rollup@4.13.0)(vue@3.4.21(typescript@5.4.2))
+      '@vee-validate/rules':
+        specifier: ^4.13.0
+        version: 4.13.1(vue@3.4.21(typescript@5.4.2))
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1(encoding@0.1.13)
@@ -35,6 +41,9 @@ importers:
       sweetalert2:
         specifier: ^11.10.6
         version: 11.10.6
+      validator:
+        specifier: ^13.12.0
+        version: 13.12.0
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.2)
@@ -1119,6 +1128,12 @@ packages:
     resolution: {integrity: sha512-Lm6cnbX/QGCh+pxGN1Tl6LVXxYs5bLlN8APfI2rQ5kMNRE6Yy7r2eY5wCZ0SfsSRonqJxzVlgMMh8JPEY5d4GQ==}
     peerDependencies:
       vue: '>=2.7 || >=3'
+
+  '@vee-validate/nuxt@4.13.1':
+    resolution: {integrity: sha512-dvpXF5t9AvablUJjiZ/88bvgbW41h1ZNtBtIRL79/wEmQCGz1lrViBkSADebz3I7QBXvbWKo1NGEZEKGnP/+Kw==}
+
+  '@vee-validate/rules@4.13.1':
+    resolution: {integrity: sha512-qqL+Ltqs9/SafTZg6haiSt+nkC1gs7GdrnuiQKoI0au6qrRBMqqXfWcY1GK3bNH8uSAX2GfTaZieqpsbOJ7yZQ==}
 
   '@vercel/nft@0.26.4':
     resolution: {integrity: sha512-j4jCOOXke2t8cHZCIxu1dzKLHLcFmYzC3yqAK6MfZznOL1QIJKd0xcFsXK3zcqzU7ScsE2zWkiMMNHGMHgp+FA==}
@@ -3984,6 +3999,10 @@ packages:
     resolution: {integrity: sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==}
     engines: {node: '>=14.16'}
 
+  type-fest@4.19.0:
+    resolution: {integrity: sha512-CN2l+hWACRiejlnr68vY0/7734Kzu+9+TOslUXbSCQ1ruY9XIHDBSceVXCcHm/oXrdzhtLMMdJEKfemf1yXiZQ==}
+    engines: {node: '>=16'}
+
   typed-array-buffer@1.0.2:
     resolution: {integrity: sha512-gEymJYKZtKXzzBzM4jqa9w6Q1Jjm7x2d+sh19AdsD4wqnMPDYyvwpsIc2Q/835kHuo3BEQ7CjelGhfTsoBb2MQ==}
     engines: {node: '>= 0.4'}
@@ -4146,6 +4165,15 @@ packages:
   validate-npm-package-name@5.0.0:
     resolution: {integrity: sha512-YuKoXDAhBYxY7SfOKxHBDoSyENFeW5VvIIQp2TGQuit8gpK6MnWaQelBKxso72DoxTZfZdcP3W90LqpSkgPzLQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
+
+  validator@13.12.0:
+    resolution: {integrity: sha512-c1Q0mCiPlgdTVVVIJIrBuxNicYE+t/7oKeI9MWLj3fh/uq2Pxh/3eeWbVZ4OcGW1TUf53At0njHw5SMdA3tmMg==}
+    engines: {node: '>= 0.10'}
+
+  vee-validate@4.13.1:
+    resolution: {integrity: sha512-JAlUWTBHg0z66n+v66mrtE9IC1xmVCggzpyc7UXCNkizVok8Zgt1VAVjobSxA/0N19Zn6v6hRfjoYciYH/Z11Q==}
+    peerDependencies:
+      vue: ^3.4.26
 
   vite-node@1.4.0:
     resolution: {integrity: sha512-VZDAseqjrHgNd4Kh8icYHWzTKSCZMhia7GyHfhtzLW33fZlG9SwsB6CEhgyVOWkJfJ2pFLrp/Gj1FSfAiqH9Lw==}
@@ -4942,7 +4970,7 @@ snapshots:
 
   '@nuxt/devtools-kit@1.0.8(nuxt@3.11.1(@parcel/watcher@2.4.1)(@types/node@20.11.30)(encoding@0.1.13)(eslint@8.57.0)(ioredis@5.3.2)(optionator@0.9.3)(rollup@4.13.0)(sass@1.72.0)(terser@5.29.2)(typescript@5.4.2)(vite@5.1.6(@types/node@20.11.30)(sass@1.72.0)(terser@5.29.2)))(rollup@4.13.0)(vite@5.1.6(@types/node@20.11.30)(sass@1.72.0)(terser@5.29.2))':
     dependencies:
-      '@nuxt/kit': 3.11.1(rollup@4.13.0)
+      '@nuxt/kit': 3.11.2(rollup@4.13.0)
       '@nuxt/schema': 3.11.1(rollup@4.13.0)
       execa: 7.2.0
       nuxt: 3.11.1(@parcel/watcher@2.4.1)(@types/node@20.11.30)(encoding@0.1.13)(eslint@8.57.0)(ioredis@5.3.2)(optionator@0.9.3)(rollup@4.13.0)(sass@1.72.0)(terser@5.29.2)(typescript@5.4.2)(vite@5.1.6(@types/node@20.11.30)(sass@1.72.0)(terser@5.29.2))
@@ -5576,6 +5604,22 @@ snapshots:
       hookable: 5.5.3
       unhead: 1.8.20
       vue: 3.4.21(typescript@5.4.2)
+
+  '@vee-validate/nuxt@4.13.1(rollup@4.13.0)(vue@3.4.21(typescript@5.4.2))':
+    dependencies:
+      '@nuxt/kit': 3.11.2(rollup@4.13.0)
+      local-pkg: 0.5.0
+      vee-validate: 4.13.1(vue@3.4.21(typescript@5.4.2))
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+      - vue
+
+  '@vee-validate/rules@4.13.1(vue@3.4.21(typescript@5.4.2))':
+    dependencies:
+      vee-validate: 4.13.1(vue@3.4.21(typescript@5.4.2))
+    transitivePeerDependencies:
+      - vue
 
   '@vercel/nft@0.26.4(encoding@0.1.13)':
     dependencies:
@@ -8963,6 +9007,8 @@ snapshots:
 
   type-fest@3.13.1: {}
 
+  type-fest@4.19.0: {}
+
   typed-array-buffer@1.0.2:
     dependencies:
       call-bind: 1.0.7
@@ -9166,6 +9212,14 @@ snapshots:
   validate-npm-package-name@5.0.0:
     dependencies:
       builtins: 5.0.1
+
+  validator@13.12.0: {}
+
+  vee-validate@4.13.1(vue@3.4.21(typescript@5.4.2)):
+    dependencies:
+      '@vue/devtools-api': 6.6.1
+      type-fest: 4.19.0
+      vue: 3.4.21(typescript@5.4.2)
 
   vite-node@1.4.0(@types/node@20.11.30)(sass@1.72.0)(terser@5.29.2):
     dependencies:

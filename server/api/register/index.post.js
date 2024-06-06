@@ -36,11 +36,17 @@ export default defineEventHandler(async (event) => {
     };
   } catch (e) {
     console.log(e);
-    return {
-      code: 500,
-      message: e,
-      errorCode: e.code,
-      reason: e.keyPattern,
-    };
+    if (e.code === 11000)
+      return {
+        code: 400,
+        message: "帳號重複"
+      }
+    else
+      return {
+        code: 500,
+        message: e,
+        errorCode: e.code,
+        reason: e.keyPattern,
+      };
   }
 });
