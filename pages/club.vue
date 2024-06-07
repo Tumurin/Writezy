@@ -118,9 +118,9 @@
         <p class="mt-3" style="color: #7f7e88">共一萬名成員</p>
       </div>
       <div class="col-md-6 posts h-100">
-        <PostsPostFrame />
+        <PostFrame />
         <hr />
-        <PostsPostFrame />
+        <PostFrame />
         <hr />
       </div>
     </div>

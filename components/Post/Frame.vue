@@ -15,8 +15,9 @@
         width="24"
         height="24"
         fill="currentColor"
-        class="bi bi-three-dots"
+        class="pointer bi bi-three-dots"
         viewBox="0 0 16 16"
+        @click="edit"
       >
         <path
           d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"
@@ -29,7 +30,8 @@
         :class="{ 'col-lg-8': isImage }"
         :style="{ 'max-height': showContent ? '100%' : '' }"
       >
-        <slot></slot>
+        <textarea v-if="onEditMode" v-model="newContent" />
+        <slot v-else></slot>
       </div>
       <div class="col-lg-4" v-if="isImage">
         <img
@@ -116,16 +118,53 @@
   </div>
 </template>
 <script setup>
-defineProps({
-  author: {
+const props = defineProps({
+  articleId: {
     type: String,
+  },
+  author: {
+    type: Object,
     default: "Author",
   },
+  content: {
+    type: String,
+  },
 });
+
+onBeforeMount(() => {
+  newContent.value = props.content;
+});
+
 const showContent = ref(false);
 const isImage = ref(true);
+
+const onEditMode = ref(false);
+const newContent = ref("");
+
+const emits = defineEmits(["edited"]);
+async function edit() {
+  // TODO: 比對用戶 id 跟 authorId 是否相符
+  if (onEditMode.value === false) {
+    onEditMode.value = !onEditMode.value;
+  } else {
+    const result = await useFetchWithToken(`api/article/${props.articleId}`, {
+      method: "PATCH",
+      body: {
+        content: newContent.value,
+      },
+    });
+    console.log(result);
+    emits("edited");
+    onEditMode.value = !onEditMode.value;
+  }
+}
 </script>
 <style scoped>
+/* 手指 hover */
+.pointer {
+  cursor: pointer;
+}
+
 /* .frame {
   max-width: 700px;
   height: 100%;

@@ -66,12 +66,15 @@
         </div>
         <div class="horizontal-line-grey"></div>
 
-        <PostsPostFrame
+        <PostFrame
           v-for="(article, index) in articles"
+          :articleId="article._id"
           :author="article.author"
+          :content="article.content"
           :key="index"
+          @edited="refresh"
         >
-          {{ article.content }}</PostsPostFrame
+          {{ article.content }}</PostFrame
         >
         <div class="horizontal-line-grey my-3"></div>
       </div>
