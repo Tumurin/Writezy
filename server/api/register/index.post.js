@@ -32,6 +32,7 @@ export default defineEventHandler(async (event) => {
     return {
       code: 200,
       message: "成功新建帳號",
+      status: true,
       body: result,
     };
   } catch (e) {
@@ -39,11 +40,13 @@ export default defineEventHandler(async (event) => {
     if (e.code === 11000)
       return {
         code: 400,
+        status: false,
         message: "帳號重複"
       }
     else
       return {
         code: 500,
+        status: false,
         message: e,
         errorCode: e.code,
         reason: e.keyPattern,
