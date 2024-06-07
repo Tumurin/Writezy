@@ -17,8 +17,12 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-    max: 100,
+    maxlength: 100,
+    select: false,
   },
+},
+{
+  versionKey: false
 });
 
 export const User = mongoose.model("User", UserSchema);
