@@ -34,12 +34,14 @@
                     </button>
                     <ul class="avatar-wrapper dropdown-menu dropdown-menu-end">
                       <li>
-                        <a class="dropdown-item" href="#" @click="goToProfile"
-                          >前往個人主頁</a
+                        <nuxt-link class="dropdown-item" to="/friend">
+                          前往個人主頁</nuxt-link
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="#">前往我的社團-程式同好社</a>
+                        <nuxt-link class="dropdown-item" to="/club">
+                          前往我的社團-六角學院</nuxt-link
+                        >
                       </li>
                       <li><a class="dropdown-item" href="#">建立新社團</a></li>
                       <li><a class="dropdown-item" href="#">編輯主頁</a></li>

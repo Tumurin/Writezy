@@ -50,13 +50,29 @@
 
       <!-- 中間瀑布流式貼文 -->
       <div class="col-12 col-lg-6 border">
-        <div class="middle-wrapper d-flex">
-          <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
-          <input type="text" class="form-control" placeholder="發布心情..." />
+        <div class="middle-wrapper d-flex flex-column">
+          <div class="d-flex mb-3">
+            <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
+            <input
+              type="text"
+              class="form-control"
+              v-model="content"
+              placeholder="發布心情..."
+            />
+          </div>
+          <button type="button" class="btn btn-primary ms-auto" @click="postArticle">
+            發送
+          </button>
         </div>
-        <div class="horizontal-line-grey my-3"></div>
+        <div class="horizontal-line-grey"></div>
 
-        <PostsPostFrame></PostsPostFrame>
+        <PostsPostFrame
+          v-for="(article, index) in articles"
+          :author="article.author"
+          :key="index"
+        >
+          {{ article.content }}</PostsPostFrame
+        >
         <div class="horizontal-line-grey my-3"></div>
       </div>
 
@@ -77,6 +93,39 @@
 definePageMeta({
   middleware: "auth",
 });
+
+onBeforeMount(() => {
+  refresh();
+});
+
+/** 貼文牆上所有的文章 */
+const articles = ref([]);
+
+/** 用戶輸入框中的新文章 */
+const content = ref("");
+
+async function postArticle() {
+  console.log("送出貼文", content.value);
+  const result = await useFetchWithToken("/api/article", {
+    method: "POST",
+    body: {
+      content: content.value,
+    },
+  });
+  if (result.code === 200) {
+    content.value = "";
+    refresh();
+  }
+}
+
+// 刷新
+async function refresh() {
+  const result = await useFetchWithToken("/api/article", {
+    method: "GET",
+  });
+  console.log("刷新", result);
+  articles.value = result.articles;
+}
 
 const posts = [
   { id: 1, title: "Post Title 1", content: "Post content 1" },
@@ -100,10 +149,6 @@ const clubs = [
   { id: 1, avatarUrl: "https://placehold.co/32", name: "社團1" },
   { id: 2, avatarUrl: "https://placehold.co/32", name: "社團2" },
 ];
-
-function post() {
-  console.log("按送出");
-}
 </script>
 
 <style lang="scss" scoped>

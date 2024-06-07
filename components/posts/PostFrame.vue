@@ -5,7 +5,7 @@
         <div class="avatar rounded-circle"></div>
         <div class="ms-3">
           <span class="name d-block"
-            >林小明 <span class="ms-3 date">3月16日 18:03</span></span
+            >{{ author.name }} <span class="ms-3 date">3月16日 18:03</span></span
           >
           <span class="nick-name d-block">汽車銷售員</span>
         </div>
@@ -29,12 +29,7 @@
         :class="{ 'col-lg-8': isImage }"
         :style="{ 'max-height': showContent ? '100%' : '' }"
       >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet quod perferendis
-        soluta asperiores exercitationem fugiat, illum consequatur nam accusamus beatae
-        vel quaerat repudiandae earum laboriosam pariatur, molestias vitae hic eligendi.
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, ad id
-        inventore, neque velit nemo sapiente deserunt excepturi minima, dolores recusandae
-        blanditiis perspiciatis. Reiciendis expedita hic porro eligendi illum qui!
+        <slot></slot>
       </div>
       <div class="col-lg-4" v-if="isImage">
         <img
@@ -121,6 +116,12 @@
   </div>
 </template>
 <script setup>
+defineProps({
+  author: {
+    type: String,
+    default: "Author",
+  },
+});
 const showContent = ref(false);
 const isImage = ref(true);
 </script>
