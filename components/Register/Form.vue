@@ -1,6 +1,6 @@
 <!-- RegistrationForm.vue -->
 <template>
-  <VeeForm @submit="submit()" v-slot="{ errors }">
+  <VeeForm @submit="submitForm" ref="form" v-slot="{ errors, meta }">
     <div class="row">
       <label for="name" class="form-label col-12 ps-0">Name：</label>
       <VeeField
@@ -41,7 +41,7 @@
     </div>
 
     <div class="d-flex flex-row-reverse mt-3">
-      <button @click.prevent="submitForm" type="submit" class="btn btn-primary ms-auto">
+      <button type="submit" :disabled="!meta.valid" class="btn btn-primary ms-auto">
         Register
       </button>
     </div>
