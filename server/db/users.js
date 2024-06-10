@@ -11,7 +11,6 @@ export const getUserByEmail = async (email) => {
 };
 
 export const getUserById = async (id) => {
-  console.log(id);
   return User.findById(id, {
     _id: true,
     name: true,

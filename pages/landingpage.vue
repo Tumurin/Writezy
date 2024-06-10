@@ -10,7 +10,7 @@
         <h2 class="display-3"><b>自由網路社群</b></h2>
         <p class="lead">輕鬆書寫，讓AI幫你分類，尋找讀者。</p>
         <div class="mt-4">
-          <a href="#features" class="btn btn-primary btn-lg">立即加入</a>
+          <nuxt-link to="/login" class="btn btn-primary btn-lg">立即加入 </nuxt-link>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
   </section>
 
   <!-- 問題解決區塊：說明公司如何解決特定問題 -->
-  <section class="problem-solution py-5">
+  <section id="problems" class="problem-solution py-5">
     <div class="container">
       <!-- 小標題 -->
       <h2 class="mb-4">
@@ -93,7 +93,7 @@
   </section>
 
   <!-- 產品特色區塊 -->
-  <section class="product-features py-5">
+  <section id="features" class="product-features py-5">
     <div class="container">
       <!-- 標題與標籤 -->
       <div class="row mb-5">
@@ -154,19 +154,17 @@
   </section>
 
   <!-- 開發團隊區塊 -->
-  <section class="developer-team bg-grey-09 text-grey-01 py-5">
+  <section id="about_us" class="developer-team bg-grey-09 text-grey-01 py-5">
     <div class="container">
       <!-- 標題與分隔線 -->
       <h2 class="mb-3">關於<span class="text-primary-02">我們</span></h2>
       <hr />
       <!-- 團隊成員標籤 -->
 
-      <div class="mb-4">
-        <span class="badge bg-secondary me-3"># 窄窄</span>
-        <span class="badge bg-secondary me-3"># 寬寬</span>
-        <span class="badge bg-secondary me-3"># 麥麥口</span>
-        <span class="badge bg-secondary me-3"># 芮妮</span>
-        <span class="badge bg-secondary me-3"># 馬丁尼</span>
+      <div class="d-flex mb-3">
+        <TagOrange class="me-3"># 芮妮</TagOrange>
+        <TagOrange class="me-3"># 麥口</TagOrange>
+        <TagOrange class="me-3"># 寬寬</TagOrange>
       </div>
       <!-- 團隊成員卡片，可捲動 -->
       <div class="d-flex custom-scroll">
@@ -193,9 +191,7 @@
           <template #tags>
             <TagOrange>#雜魚工程師</TagOrange>
           </template>
-          <template #description>
-            還在學習後端路上載浮載沉的雜魚一條。
-          </template>
+          <template #description> 還在學習後端路上載浮載沉的雜魚一條。 </template>
         </CardIntroduce>
         <!-- 寬寬 -->
         <CardIntroduce class="me-3">
@@ -212,7 +208,7 @@
           </template>
         </CardIntroduce>
         <!-- Rock -->
-        <CardIntroduce class="me-3"></CardIntroduce>
+        <!-- <CardIntroduce class="me-3"></CardIntroduce> -->
       </div>
     </div>
   </section>
@@ -224,6 +220,7 @@
 <script setup>
 definePageMeta({
   layout: "landing",
+  middleware: "auto-login",
 });
 </script>
 

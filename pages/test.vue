@@ -73,6 +73,7 @@
     <ButtonFlatPhoto></ButtonFlatPhoto>
     <ButtonFlatClear></ButtonFlatClear>
     <ButtonFlatArrowLeftSmall></ButtonFlatArrowLeftSmall>
+    <UIChooseCollection></UIChooseCollection>
   </div>
   <br />
   <ButtonOutlinedPhoto></ButtonOutlinedPhoto>

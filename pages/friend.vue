@@ -79,6 +79,7 @@
       </ul>
     </div>
   </div>
+  <PostFrame/>
 </template>
 <style scoped>
 .input-group {

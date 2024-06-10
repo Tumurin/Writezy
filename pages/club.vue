@@ -8,9 +8,9 @@
         <ItemsIntroductionFrame/>
       </div>
       <div class="col-md-6 posts h-100">
-        <PostsFrame />
+        <PostFrame />
         <hr />
-        <PostsFrame />
+        <PostFrame />
         <hr />
       </div>
     </div>

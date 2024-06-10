@@ -3,7 +3,7 @@
   <div class="p-2">
     <!-- 資料夾標題，點擊時切換展開/折疊狀態 -->
     <div class="d-flex justify-content-between">
-      <div class="folder-header" @click="toggleFolder">
+      <div class="cursor-pointer" @click="toggleFolder">
         <!-- 展開/折疊指示符 -->
         <Icon
           :name="
@@ -14,7 +14,9 @@
         <span>{{ folderName }}</span>
       </div>
       <!-- 編輯資料夾圖標 -->
-      <Icon name="tabler:pencil" />
+      <button class="btn" @click="onEditClicked">
+        <Icon name="tabler:pencil" />
+      </button>
     </div>
     <!-- 資料夾內容，僅在展開時顯示 -->
     <div v-if="isOpen" class="ms-2">
@@ -24,11 +26,19 @@
           <!-- 若項目是資料夾，則遞歸顯示Folder元件 -->
           <Folder
             v-if="item.type === 'folder'"
+            class="w-100"
             :folderName="item.name"
             :items="item.children"
           />
-          <!-- 若項目是標籤，直接顯示標籤名稱 -->
-          <TagOrange v-else class="my-1">#{{ item.name }}</TagOrange>
+          <div v-else class="d-flex justify-content-between">
+            <!-- 若項目是標籤，直接顯示標籤名稱 -->
+            <nuxt-link :to="`../collection/${item._id}`">
+              <TagOrange class="my-1">#{{ item.name }}</TagOrange>
+            </nuxt-link>
+            <button v-if="onEditMode" class="btn" @click="deleteItem(item._id)">
+              <Icon name="ic:outline-clear" />
+            </button>
+          </div>
         </li>
       </ul>
     </div>
@@ -46,7 +56,13 @@ const props = defineProps({
     type: Array,
     required: true, // 資料夾項目列表為必填
   },
+  navTo: {
+    type: String, // 資料夾項目點選路由
+  },
 });
+
+// 是否處於編輯模式
+const onEditMode = ref(false);
 
 // 資料夾展開狀態，預設為展開
 const isOpen = ref(true);
@@ -55,11 +71,24 @@ const isOpen = ref(true);
 const toggleFolder = () => {
   isOpen.value = !isOpen.value;
 };
+
+const emits = defineEmits(["switchEditMode", "deleteItem"]);
+
+// 切換
+function onEditClicked() {
+  onEditMode.value = !onEditMode.value;
+  emits("switchEditMode");
+}
+
+function deleteItem(id) {
+  console.log("刪除項目", id);
+  emits("deleteItem", id);
+}
 </script>
 
 <style scoped>
 /* 資料夾標題樣式 */
-.folder-header {
+.cursor-pointer {
   cursor: pointer;
 }
 </style>

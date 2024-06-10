@@ -3,21 +3,27 @@
     <div class="card mt-5 w-50 mx-auto">
       <div class="card-header">登入</div>
       <div class="card-body">
-        <div class="form-group">
-          <label>Email</label>
-          <input v-model="email" type="email" class="form-control" required />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input v-model="password" type="password" class="form-control" required />
-        </div>
-        <div class="d-flex flex-row-reverse">
-          <button @click.prevent="submitForm" class="btn btn-primary m-2">Login</button>
-          <!-- 僅在客戶端渲染 -->
-          <ClientOnly>
-            <GoogleLogin class="m-2" :callback="googleLogin" />
-          </ClientOnly>
-        </div>
+        <VeeForm @submit="submit()" v-slot="{ errors }" class="">
+          <div class="form-group row">
+            <label for="email" class="form-label col-12 ps-0">Email：</label>
+            <VeeField class="col-12" v-model.trim="email" label="email" name="email" type="email" rules="required|email"/>
+            <div class="text-red">{{ errors.email }}</div>
+          </div>
+
+          <div class="form-group row">
+            <label for="password" class="form-label col-12 ps-0">Password：</label>
+            <VeeField class="col-12" v-model.trim="password" label="password" name="password" type="password" :rules="rules.password"/>
+            <div class="text-red">{{ errors.password }}</div>
+          </div>
+
+          <div class="d-flex flex-row-reverse">
+            <button @click.prevent="submitForm" class="btn btn-primary m-2">Login</button>
+            <!-- 僅在客戶端渲染 -->
+            <!-- <ClientOnly>
+              <GoogleLogin class="m-2" :callback="googleLogin" />
+            </ClientOnly> -->
+          </div>
+        </VeeForm>
       </div>
     </div>
   </div>
@@ -31,6 +37,19 @@ const password = ref("");
 
 const user = useAuthUser();
 const { initAuth } = useAuth();
+
+/* 輸入表單驗證規則 */
+const { $validator } = useNuxtApp()
+const rules = {
+  password: (val) => {
+    if (!val) return '密碼 為必填'
+    if (!$validator.isLength(val, { min: 8 })) return '密碼需至少 8 碼以上'
+    if ($validator.isAlpha(val)) return '密碼不能只有英文'
+    if ($validator.isNumeric(val)) return '密碼不能只有數字'
+    if (!$validator.isAlphanumeric(val)) return '密碼需至少 8 碼以上，並英數混合'
+    return {}
+  },
+}
 
 onBeforeMount(async () => {
   try {
