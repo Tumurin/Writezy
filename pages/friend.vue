@@ -107,8 +107,8 @@ const login = async()=>{
             method: 'POST',
             body: {email:emailInput.value,name:userName.value}
         })
-        console.log(owner.user[0])
-        thisOwner.value = {...owner.user[0]}
+        console.log(owner.data[0])
+        thisOwner.value = {...owner.data[0]}
         console.log(thisOwner.value)
         isLogin.value = true
     }catch(error){
@@ -189,7 +189,7 @@ const filterUsers = computed(() => {
 const getAllUsers = async () => {
   try {
     const allUsers = await $fetch("/api/friend/all");
-    users.value = allUsers.users;
+    users.value = allUsers.data;
     console.log(users.value);
   } catch (error) {
     console.log(error);
