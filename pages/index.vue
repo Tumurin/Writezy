@@ -88,6 +88,9 @@
 </template>
 
 <script setup>
+import { useAuth } from "#imports";
+
+const myAuth = useAuth();
 definePageMeta({
   middleware: "auth",
 });

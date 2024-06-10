@@ -20,7 +20,26 @@ const UserSchema = new Schema({
     maxlength: 100,
     select: false,
   },
+
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  friends: [
+    {
+      id: String,
+      name: String,
+      status: { type: Boolean, default: false }
+    }
+  ],
+  clubs: [
+    {
+      id: String,
+      name: String
+    }
+  ],
 },
+
 {
   versionKey: false
 });

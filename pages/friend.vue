@@ -104,11 +104,12 @@ a:hover {
 import Swal from "sweetalert2";
 const login = async()=>{
     try{
-        const owner = await $fetch('http://127.0.0.1:3005/relationship/owner',{
+        const owner = await $fetch('/api/friend/owner',{
             method: 'POST',
             body: {email:emailInput.value,name:userName.value}
         })
-        thisOwner.value = {...owner.data[0]}
+        console.log(owner.user[0])
+        thisOwner.value = {...owner.user[0]}
         console.log(thisOwner.value)
         isLogin.value = true
     }catch(error){
@@ -137,7 +138,7 @@ const addFriend = async()=>{
     status:false
   }
   try{
-    const newFriend = await $fetch(`http://127.0.0.1:3005/relationship/addFriend/${tempUser.value._id}`,{
+    const newFriend = await $fetch(`/api/friend/addFriend/${tempUser.value._id}`,{
       method:'PATCH',
       body:data
     })
@@ -150,7 +151,7 @@ const addFriend = async()=>{
 const confirmFriend = async(oppoentId)=>{
   const id = thisOwner.value._id
   try{
-    const confirmNewFriend = await $fetch(`http://127.0.0.1:3005/relationship/confirm/${id}`,{
+    const confirmNewFriend = await $fetch(`/api/friend/confirmFriend/${id}`,{
       method:'PATCH',
       body:{
         id:oppoentId,
@@ -167,7 +168,7 @@ const confirmFriend = async(oppoentId)=>{
 const deleteFriend = async(oppoentId)=>{
   const id = thisOwner.value._id
   try{
-    const deleteMyFriend = await $fetch(`http://127.0.0.1:3005/relationship/deleteFriend/${id}`,{
+    const deleteMyFriend = await $fetch(`/api/friend/deleteFriend/${id}`,{
       method:'PATCH',
       body:{
         id:oppoentId,
@@ -188,8 +189,8 @@ const filterUsers = computed(() => {
 });
 const getAllUsers = async () => {
   try {
-    const allUsers = await $fetch("http://127.0.0.1:3005/relationship/all");
-    users.value = allUsers.data;
+    const allUsers = await $fetch("/api/friend/all");
+    users.value = allUsers.users;
     console.log(users.value);
   } catch (error) {
     console.log(error);
