@@ -96,6 +96,10 @@ onBeforeMount(() => {
   refresh();
 });
 
+// 收藏分類id
+const route = useRoute();
+const collectionId = route.params.id;
+
 /** 貼文牆上所有的文章 */
 const articles = ref([]);
 
@@ -118,7 +122,7 @@ async function postArticle() {
 
 // 刷新
 async function refresh() {
-  const result = await useFetchWithToken("/api/article", {
+  const result = await useFetchWithToken(`/api/collection/${collectionId}`, {
     method: "GET",
   });
   console.log("刷新", result);
