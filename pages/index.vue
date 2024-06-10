@@ -72,6 +72,8 @@
           :author="article.author"
           :content="article.content"
           :key="index"
+          :likedBy="article.likedBy"
+          :likes="article.likes"
           @edited="refresh"
         >
           {{ article.content }}</PostFrame

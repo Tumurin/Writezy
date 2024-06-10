@@ -36,6 +36,12 @@ const articleSchema = new Schema({
         type: Number,
         default: 0,
     },
+    likedBy: [ // 紀錄哪些用戶點擊過該文章的讚
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        }
+    ],
     comments: [{
         type: Schema.Types.ObjectId, // 評論ID
         ref: 'Comment', // 參照 Comment 模型
