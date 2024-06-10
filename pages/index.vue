@@ -74,10 +74,25 @@
 </template>
 
 <script setup>
+import { useAuth } from '#imports';
+
+const myAuth = useAuth()
 definePageMeta({
   middleware: "auth",
 });
-
+const getUser = async () => {
+  try {
+    const data = await useFetchWithToken(`/api/auth/user`, {
+      method: "GET",
+    });
+    console.log(data.user);
+  } catch (err) {
+    console.log(error);
+  }
+};
+onMounted(() => {
+  myAuth.getUser()
+});
 const posts = [
   { id: 1, title: "Post Title 1", content: "Post content 1" },
   { id: 2, title: "Post Title 2", content: "Post content 2" },

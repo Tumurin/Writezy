@@ -126,6 +126,7 @@ export default () => {
     return {
         login,
         logout,
-        initAuth
+        initAuth,
+        getUser
     }
 }
