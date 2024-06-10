@@ -30,20 +30,18 @@
                       aria-expanded="false"
                       data-bs-auto-close="false"
                     >
-                      <img
-                        :src="placeholderUrl"
-                        alt="User Avatar"
-                        class="avatar-img rounded-circle"
-                      />
+                      <UIAvatar userId="abcd1234"></UIAvatar>
                     </button>
                     <ul class="avatar-wrapper dropdown-menu dropdown-menu-end">
                       <li>
-                        <a class="dropdown-item" href="#" @click="goToProfile"
-                          >前往個人主頁</a
+                        <nuxt-link class="dropdown-item" to="/friend">
+                          前往個人主頁</nuxt-link
                         >
                       </li>
                       <li>
-                        <a class="dropdown-item" href="#">前往我的社團-程式同好社</a>
+                        <nuxt-link class="dropdown-item" to="/club">
+                          前往我的社團-六角學院</nuxt-link
+                        >
                       </li>
                       <li><a class="dropdown-item" href="#">建立新社團</a></li>
                       <li><a class="dropdown-item" href="#">編輯主頁</a></li>
@@ -450,7 +448,6 @@
 
 <script setup>
 const userInfo = useAuthUser();
-const placeholderUrl = "https://via.placeholder.com/40";
 </script>
 
 <style lang="scss" scoped>

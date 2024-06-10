@@ -10,6 +10,8 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vee-validate/nuxt": "^4.13.0",
+    "@vee-validate/rules": "^4.13.0",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "jsonwebtoken": "^9.0.2",
@@ -19,6 +21,7 @@
     "nuxt-icon": "^0.6.10",
     "sass": "^1.72.0",
     "sweetalert2": "^11.10.6",
+    "validator": "^13.12.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

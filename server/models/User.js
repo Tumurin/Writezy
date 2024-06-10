@@ -17,8 +17,10 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true,
-    max: 100,
+    maxlength: 100,
+    select: false,
   },
+
   createdAt: {
     type: Date,
     default: Date.now
@@ -37,9 +39,9 @@ const UserSchema = new Schema({
     }
   ],
 },
+
 {
-  versionKey: false,
-  timestamps: true
+  versionKey: false
 });
 
 export const User = mongoose.model("User", UserSchema);

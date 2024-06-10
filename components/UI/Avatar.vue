@@ -1,5 +1,5 @@
 <template>
-  <div class="user-avatar" @click="goToProfile">
+  <div class="user-avatar">
     <img
       :src="avatarUrl || placeholderUrl"
       alt="User Avatar"

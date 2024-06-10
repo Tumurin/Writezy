@@ -29,10 +29,10 @@
       <div class="row">
         <div class="col-md-6">
           <div class="social-icons">
-            <a href="#" class="me-2">FB icon<i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="me-2">IG icon<i class="fab fa-instagram"></i></a>
-            <a href="#" class="me-2">YT icon<i class="fab fa-youtube"></i></a>
-            <a href="#">Line icon<i class="fab fa-line"></i></a>
+            <Icon name="bi:facebook" class="me-2" />
+            <Icon name="bi:youtube" class="me-2" />
+            <Icon name="ph:instagram-logo-bold" class="me-2" />
+            <!-- <a href="#">Line icon<i class="fab fa-line"></i></a> -->
           </div>
         </div>
         <div class="col-md-6">

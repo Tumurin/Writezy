@@ -5,8 +5,8 @@ import { decodeAccessToken } from "../utils/jwt.js"
 export default defineEventHandler(async (event) => {
     const endpoints = [
         '^/api/auth/user',
-        '^/api/credit',
-        '^/api/admin',
+        '^/api/article',
+        '^/api/collection',
     ]
     const isHandledByThisMiddleware = endpoints.some(endopoint => {
         const regex = new RegExp(endopoint);

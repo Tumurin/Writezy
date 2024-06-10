@@ -32,5 +32,27 @@ export default defineNuxtConfig({
         autoprefixer: true
     }
   },
-  modules: ['nuxt-icon']
+  modules: [
+    'nuxt-icon',
+    [
+      '@vee-validate/nuxt',
+      {
+        // 啟用 auto imports
+        autoImports: true,
+        // 更換 components 名稱
+        componentNames: {
+          Form: 'VeeForm',
+          Field: 'VeeField',
+          FieldArray: 'VeeFieldArray',
+          ErrorMessage: 'VeeErrorMessage',
+        },
+      },
+    ],
+  ],
+  build: {
+    // Add exception
+    transpile: [
+      "vee-validate/dist/rules"
+    ],
+  }
 })
