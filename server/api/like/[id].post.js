@@ -1,126 +1,74 @@
-import { Article } from '~/server/models/Article';
-import { Like } from '~/server/models/Like';
+// 點讚功能
+import { Article } from '~/server/models/Article'
+import { Comment } from '~/server/models/Comment';
+
 
 export default defineEventHandler(async (event) => {
     console.log("[api/like] 點讚")
-    const body = await readBody(event)
+    const body = await readBody(event);
     console.log("[api/like] 請求主體", body)
     const { action, articleId, userId, commentId } = body;
-
-    if (!['like', 'dislike'].includes(action)) {
+    
+    if (action !== 'like') {
         return {
-        status: false,
-        message: 'Invalid action',
-        };
-    }
-
-    if (!articleId || !userId) {
-        return {
-        status: false,
-        message: 'articleId and userId are required',
+            code: 400,
+            status: false,
+            message: 'Invalid action',
         };
     }
 
     try {
-        // const article = await Article.findById(articleId).populate('comments');
-        const article = await Article.findById(articleId);
-        if (!article) {
-            return {
-                status: false,
-                message: 'Article not found',
-            };
-        }
-
+        let target;
         if (commentId) {
-            const comment = article.comments.id(commentId);
-            if (!comment) {
+            target = await Comment.findById(commentId);
+            if (!target) {
                 return {
+                    code: 400,
                     status: false,
                     message: 'Comment not found',
                 };
             }
-
-            if (action === 'like') {
-                if (comment.likedBy.includes(userId)) {
-                    return {
-                        status: false,
-                        message: 'User has already liked this comment',
-                    };
-                }
-                comment.likes = (comment.likes || 0) + 1;
-                comment.likedBy.push(userId);
-            } else if (action === 'dislike') {
-                if (!comment.likedBy.includes(userId)) {
-                return {
-                    status: false,
-                    message: 'User has not liked this comment',
-                };
-                }
-                comment.likes = Math.max((comment.likes || 1) - 1, 0);
-                comment.likedBy.pull(userId);
-            }
-
-            await article.save();
-
-            return {
-                code: 200,
-                status: true,
-                message: action === 'like' ? 'Comment liked' : 'Comment dislike removed',
-                data: {
-                    articleId,
-                    userId,
-                    like_count: comment.likes,
-                    commentId,
-                },
-            };
         } else {
-            if (action === 'like') {
-                if (article.likedBy.includes(userId)) {
-                    return {
-                        status: false,
-                        message: 'User has already liked this article',
-                    };
-                }
-
-                const newLike = new Like({
-                    action,
-                    articleId,
-                    userId,
-                });
-
-                // 儲存
-                await newLike.save();
-
-                article.likes += 1;
-                article.likedBy.push(userId);
-            } else if (action === 'dislike') {
-                if (!article.likedBy.includes(userId)) {
+            target = await Article.findById(articleId);
+            if (!target) {
                 return {
+                    code: 400,
                     status: false,
-                    message: 'User has not liked this article',
+                    message: 'Article not found',
                 };
-                }
-                article.likes = Math.max(article.likes - 1, 0);
-                article.likedBy.pull(userId);
             }
+        }
 
-            await article.save();
-
+        // Check if the user has already liked this target
+        if (target.likedBy.includes(userId)) {
             return {
-                code: 200,
-                status: true,
-                message: action === 'like' ? 'Article liked' : 'Article dislike removed',
-                data: {
-                articleId,
-                userId,
-                like_count: article.likes,
-                },
+                code: 400,
+                status: false,
+                message: commentId ? 'Comment already liked' : 'Article already liked',
             };
         }
+
+        // Update the like count and likedBy array
+        target.likes += 1;
+        target.likedBy.push(userId);
+        await target.save();
+
+        return {
+            code: 200,
+            status: true,
+            message: commentId ? 'Comment liked' : 'Article liked',
+            data: {
+                articleId: articleId,
+                userId: userId,
+                like_count: target.likes,
+                commentId: commentId,
+            },
+        };
     } catch (error) {
         return {
-        status: false,
-        message: error.message,
+            code: 400,
+            status: false,
+            message: 'An error occurred',
         };
     }
 });
