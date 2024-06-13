@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
         '^/api/auth/user',
         '^/api/article',
         '^/api/collection',
+        '^/api/comment'
     ]
     const isHandledByThisMiddleware = endpoints.some(endopoint => {
         const regex = new RegExp(endopoint);
