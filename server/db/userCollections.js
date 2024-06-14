@@ -1,8 +1,6 @@
 import { UserCollection } from "~/server/models/UserCollection";
 import { Collection } from "~/server/models/Collection";
 
-import mongoose from "mongoose"
-
 /** 用戶新增新的收藏分類 */
 export const createCollection = async (userId, name) => {
     console.log(userId, name)

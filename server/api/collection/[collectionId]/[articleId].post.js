@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     const collectionId = getRouterParam(event, 'collectionId')
     console.log("[api/[collectionId]/[articleId]]", collectionId)
 
-    const userId = event.context.auth?.user;
+    const userId = event.context.auth?.user._id;
     console.log("[api/collection] 用戶id", userId)
 
     try {

@@ -1,8 +1,8 @@
-import { updateArticleById } from "~/server/db/articles"
+import { getArticleById, updateArticleById } from "~/server/db/articles"
 
 /** 編輯文章 */
 export default defineEventHandler(async (event) => {
-    const userId = event.context.auth.user.id
+    const userId = event.context.auth.user._id
     console.log("[api/article] 編輯文章", userId)
     const body = await readBody(event);
     console.log("[api/article]", body)
@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
     console.log("[api/article]", ArticleId)
 
     try {
-        if (userId === ArticleId) {
+        const article = await getArticleById(ArticleId)
+        if (userId.equals(article.author)) {
 
             const result = await updateArticleById(ArticleId, {
                 content: body.content
