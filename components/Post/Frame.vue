@@ -118,6 +118,8 @@
   </div>
 </template>
 <script setup>
+import { useAuthUser } from "~/composables/states.js"
+
 const props = defineProps({
   articleId: {
     type: String,
@@ -168,45 +170,66 @@ async function edit() {
 /**
  * 點讚邏輯
 */
-const userId = props.author._id; // 當前登入的使用者 ID
-const isLiked = ref(props.likedBy.includes(userId));
-const likeCount = ref(props.likes);
-async function handelLike () {
+// 是否已點讚
+const isLiked = ref(false)
+// 計算當前的讚數
+const likeCount = computed(() => props.likes + (isLiked.value ? 1 : 0))
+
+
+// 切換點讚狀態
+const handelLike = async () => {
+  //目前使用者的id
+  const user = useAuthUser();
+  console.log('目前的使用者id', user.value._id);
+  
+  //目前對該文章點過讚的使用者id  //false代表該文章未點過讚
+  console.log('目前對該文章點過讚的使用者id', props.likedBy);
+  const filter = props.likedBy.some(function (item, index) {
+    return item === user.value._id
+  });
+  console.log('狀態', filter);
+  
+  console.log('目前文章的點讚總數', props.likes);
+  console.log('當前文章的讚狀態', isLiked);
+  // isLiked.value = !isLiked.value
   try {
-    if (isLiked.value) { //當前畫面是true時
-      await useFetchWithToken(`/api/like/{userId}`,
-        {
-          method: "POST",
-          body: {
-            action: "dislike",
-            articleId: props.articleId,
-            userId: userId,
-            commentId: ""
-          },
+    if(filter === false) { // 點讚
+      console.log('1 點讚')
+      const res = await useFetchWithToken(`/api/like/${props.articleId}`, {
+        method: 'POST',
+        body: {
+          action: 'like',
+          articleId: props.articleId,
+          userId: user.value._id,
+          commentId: "",
+          // ...(props.commentId && { commentId: props.commentId })
         }
-      )
-      isLiked.value = false
-      likeCount.value -= 1
-    } else { //當前畫面是false時
-      await useFetchWithToken(`/api/like/{userId}`,
-        {
-          method: "POST",
-          body: {
-            action: "like",
-            articleId: props.articleId,
-            userId: userId,
-            commentId: ""
-          },
-        }
-      )
+      })
+      
       isLiked.value = true
-      likeCount.value += 1
+      likeCount++
+      return
+    } else { // 收回讚
+      console.log('2 收回讚')
+      const res = await useFetchWithToken(`/api/like/${props.articleId}`, {
+        method: 'DELETE',
+        params: {
+          articleId: props.articleId,
+          userId: props.author._id,
+          commentId: "",
+          // ...(props.commentId && { commentId: props.commentId })
+        }
+      })
+      
+      isLiked.value = false
+      likeCount--
+      return
     }
+    
   } catch (error) {
-    console.error(error)
+    console.error('Error liking/unliking the post:', error)
   }
 }
-
 </script>
 <style scoped>
 /* 手指 hover */
