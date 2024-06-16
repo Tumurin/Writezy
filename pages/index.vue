@@ -5,23 +5,8 @@
       <!-- 左側欄位 -->
       <div class="col-lg-3">
         <div class="d-none d-lg-block sticky-top">
-          <Folder
-            folderName="我的標籤"
-            :items="[
-              { id: 1, name: '標籤1', type: 'file' },
-              { id: 2, name: '標籤2', type: 'file' },
-              {
-                id: 3,
-                name: '子資料夾',
-                type: 'folder',
-                children: [
-                  { id: 4, name: '子資料夾項目1', type: 'file' },
-                  { id: 5, name: '子資料夾項目2', type: 'file' },
-                ],
-              },
-            ]"
-          ></Folder>
-          <Folder
+          <Folder folderName="我的標籤" :items="myTags"></Folder>
+          <!-- <Folder
             folderName="程式開發"
             :items="[
               { id: 1, name: '標籤1', type: 'file' },
@@ -36,7 +21,7 @@
                 ],
               },
             ]"
-          ></Folder>
+          ></Folder> -->
           <hr />
           <!-- 用戶收藏清單 -->
           <Collection></Collection>
@@ -88,10 +73,15 @@ definePageMeta({
 
 onBeforeMount(() => {
   refresh();
+  getUserTagCollections();
 });
 
 /** 貼文牆上所有的文章 */
 const articles = ref([]);
+/** 我的標籤上的未分類標籤 */
+const tags = ref([]);
+/** 我的標籤上的標籤集合 */
+const tagCollections = ref([]);
 
 async function postArticle(content) {
   console.log("送出貼文", content);
@@ -114,6 +104,28 @@ async function refresh() {
   console.log("刷新", result);
   articles.value = result.articles;
 }
+
+// 讀取用戶收藏清單
+async function getUserTagCollections() {
+  const result = await useFetchWithToken("/api/tagCollection", {
+    method: "GET",
+  });
+  console.log("用戶收藏清單", result.defaultCollection.tags);
+  tags.value = result.defaultCollection.tags;
+  tagCollections.value = result.tagCollections;
+}
+
+const myTags = computed(() => {
+  console.log("調用計算", tags.value);
+  if (!tags.value || tags.value.length == 0) return [];
+  return tags.value.map((tag, index) => {
+    return {
+      id: index,
+      name: tag,
+      type: "file",
+    };
+  });
+});
 
 const posts = [
   { id: 1, title: "Post Title 1", content: "Post content 1" },

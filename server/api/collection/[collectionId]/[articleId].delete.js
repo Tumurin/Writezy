@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     console.log("[api/[collectionId]/[articleId]]", collectionId)
 
     const userId = event.context.auth?.user._id;
-    console.log("[api/collection] 用戶id", userId)
+    console.log("[api/[collectionId]/[articleId]] 用戶id", userId)
 
     try {
         // 先確認這個 Collection 是否屬於此 User

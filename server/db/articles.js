@@ -1,9 +1,11 @@
 import { Article } from "~/server/models/Article";
 
-export const createArticle = async (authorId, content) => {
+export const createArticle = async (authorId, content, tags) => {
+    if (!tags) tags = [];
     return Article.create({
         author: authorId,
-        content: content
+        content: content,
+        tags: tags
     })
 };
 
@@ -38,3 +40,5 @@ export const addTagsToArticle = async (articleId, newTags) => {
         { new: true }
     )
 };
+
+// TODO: 透過標籤查找文章

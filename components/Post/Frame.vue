@@ -56,6 +56,17 @@
         </a>
       </p>
     </div>
+    <!-- 標籤區 -->
+    <div class="d-flex">
+      <TagOrange
+        class="mx-2 pointer"
+        v-for="(tag, index) in article.tags"
+        :key="index"
+        @click="addToTagCollection(tag)"
+        >{{ tag }}</TagOrange
+      >
+    </div>
+    <!-- 功能區 -->
     <div class="d-flex justify-content-between align-items-center mt-5">
       <div>
         <span>
@@ -153,6 +164,18 @@ async function edit() {
     emits("edited");
     onEditMode.value = !onEditMode.value;
   }
+}
+
+// 添加這個標籤到用戶收藏中
+async function addToTagCollection(tag) {
+  console.log("用戶收藏:", tag);
+  const result = await useFetchWithToken(`api/tag/`, {
+    method: "POST",
+    body: {
+      tag,
+    },
+  });
+  console.log(result);
 }
 </script>
 <style scoped>
