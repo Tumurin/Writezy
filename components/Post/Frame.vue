@@ -4,9 +4,12 @@
       <div class="avatar-name d-flex justify-content-between align-items-center">
         <div class="avatar rounded-circle"></div>
         <div class="ms-3">
-          <span class="name d-block"
-            >{{ author.name }} <span class="ms-3 date">3月16日 18:03</span></span
-          >
+          <span class="name d-block">
+            <span>
+              {{ article.author.name }}
+            </span>
+            <UILocalTimeDisplay :inputTime="article.publishedDate"></UILocalTimeDisplay>
+          </span>
           <span class="nick-name d-block">汽車銷售員</span>
         </div>
       </div>
@@ -31,7 +34,8 @@
         :style="{ 'max-height': showContent ? '100%' : '' }"
       >
         <textarea v-if="onEditMode" v-model="newContent" />
-        <slot v-else></slot>
+        <!-- <slot v-else></slot> -->
+        <PostMarkdownRenderer :content="content"></PostMarkdownRenderer>
       </div>
       <div class="col-lg-4" v-if="isImage">
         <img
@@ -108,6 +112,9 @@
 </template>
 <script setup>
 const props = defineProps({
+  article: {
+    type: Object,
+  },
   articleId: {
     type: String,
   },

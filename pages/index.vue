@@ -45,24 +45,15 @@
 
       <!-- 中間瀑布流式貼文 -->
       <div class="col-12 col-lg-6 border">
-        <div class="middle-wrapper d-flex flex-column">
-          <div class="d-flex mb-3">
-            <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
-            <input
-              type="text"
-              class="form-control"
-              v-model="content"
-              placeholder="發布心情..."
-            />
-          </div>
-          <button type="button" class="btn btn-primary ms-auto" @click="postArticle">
-            發送
-          </button>
+        <div class="middle-wrapper d-flex align-items-start">
+          <UIAvatar class="me-3" userId="abcd1234"></UIAvatar>
+          <UISampleArticleEditor class="w-100" @submit="postArticle" />
         </div>
         <div class="horizontal-line-grey"></div>
 
         <PostFrame
           v-for="(article, index) in articles"
+          :article="article"
           :articleId="article._id"
           :author="article.author"
           :content="article.content"
@@ -102,19 +93,15 @@ onBeforeMount(() => {
 /** 貼文牆上所有的文章 */
 const articles = ref([]);
 
-/** 用戶輸入框中的新文章 */
-const content = ref("");
-
-async function postArticle() {
-  console.log("送出貼文", content.value);
+async function postArticle(content) {
+  console.log("送出貼文", content);
   const result = await useFetchWithToken("/api/article", {
     method: "POST",
     body: {
-      content: content.value,
+      content: content,
     },
   });
   if (result.code === 200) {
-    content.value = "";
     refresh();
   }
 }

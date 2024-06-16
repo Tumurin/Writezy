@@ -8,10 +8,7 @@ export default defineEventHandler(async (event) => {
     const author = event.context.auth?.user;
     console.log("[api/article] 作者id", author.id)
     try {
-        const result = await createArticle({
-            content: body.content,
-            author: author.id
-        })
+        const result = await createArticle(author.id, body.content)
         return {
             code: 200,
             message: "成功發布貼文"
