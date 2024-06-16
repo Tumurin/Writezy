@@ -3,7 +3,7 @@
     <form class="form-signin wrapper m-auto" autocomplete="off">
       <div class="input-group-clear" style="position:relative">
         <input type="text" id="username" v-model="inputValue" class="form-control" 
-          @focus="showHistory = true" @blur="hideDropdown" @input="addSearchQuery" required autofocus>
+          @focus="showHistory = true" @blur="hideDropdown" @input="addSearchQuery" @keyup.enter="addSearchQuery" required autofocus>
           <div v-show="!inputValue">
             <span class="input-search">
               <Icon name="material-symbols-light:search" /> 
@@ -63,6 +63,13 @@ const clearInput = () => {
 const searchHistory = ref([])
 const showHistory = ref(false)
 const editMode = ref(false)
+
+// 當 input 失去焦點時隱藏下拉選單
+const hideDropdown = () => {
+  setTimeout(() => {
+    showHistory.value = false;
+  }, 200); // 延遲隱藏以允許點擊
+};
 
 const loadSearchHistory = () => {
   if (typeof localStorage !== 'undefined') {
