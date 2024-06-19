@@ -25,16 +25,20 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  photo: {
+    type: String,
+    default:"https://placehold.co/32"
+  },
   friends: [
     {
-      id: String,
+      id: {type:Schema.Types.ObjectId,ref:'User'},
       name: String,
       status: { type: Boolean, default: false }
     }
   ],
   clubs: [
     {
-      id: String,
+      id: {type:Schema.Types.ObjectId,ref:'Club'},
       name: String
     }
   ],

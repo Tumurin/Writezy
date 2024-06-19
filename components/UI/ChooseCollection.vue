@@ -1,7 +1,7 @@
 <template>
   <div class="position-relative">
     <button class="btn" @click="toggleMenu">
-      <Icon name="material-symbols:bookmark-outline-rounded" />
+      <Icon name="material-symbols:bookmark-outline-rounded" class="fs-3"/>
     </button>
     <!-- 用戶收藏選單 -->
     <div

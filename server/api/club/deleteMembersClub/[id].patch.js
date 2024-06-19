@@ -1,21 +1,21 @@
-import {addOneManager} from "~/server/db/club"
-
+import {deleteMembersClub} from "~/server/db/club"
 
 export default defineEventHandler(async(event)=>{
     try{
         const id = event.context.params.id
-        const body = await readBody(event);
-        const club = await addOneManager(id,body)
+        const body = await readBody(event)
+        console.log(body)
+        const club = await deleteMembersClub(id,body.id)
         return {
             code:200,
             data:club,
-            message:"已經成功修改社團管理員權限"
+            message:"成功查找所有成員"
         }
     }catch(err){
         console.log(err);
         return {
             code:400,
-            message:err.message
+            message:"查無此社團"
         }
     }
 })

@@ -79,7 +79,6 @@
       </ul>
     </div>
   </div>
-  <PostFrame/>
 </template>
 <style scoped>
 .input-group {
@@ -183,6 +182,7 @@ const deleteFriend = async(oppoentId)=>{
   getAllUsers()
 }
 const filterUsers = computed(() => {
+  
   const newUsers = users.value.filter((item) => item.name.match(name.value));
   if (newUsers.length === users.value.length) return null;
   else return newUsers;

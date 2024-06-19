@@ -20,7 +20,11 @@
       </button>
       <!-- 功能選單：檢舉、刪除好友...(TODO) -->
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="#">功能1</a></li>
+        <li>
+          <a class="dropdown-item" href="#" v-if="isManager" @click.prevent="removeClub">刪除社團</a>
+          <a class="dropdown-item" href="#" v-else-if="isFriend" @click.prevent="removeFriend">刪除好友</a>
+          <a class="dropdown-item" href="#" v-else-if="!isFriend" @click.prevent="checkFriend">確認好友</a>
+        </li>
         <li><a class="dropdown-item" href="#">功能2</a></li>
         <li><a class="dropdown-item" href="#">功能3</a></li>
       </ul>
@@ -39,7 +43,34 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  isManager:{
+    type:Boolean
+  },
+  isFriend:{
+    type:Boolean
+  },
+  clubId:{
+    type:String
+  },
+  friendId:{
+    type:String
+  }
 });
+// 刪除社團以及刪除好友確認好友函式
+const emit = defineEmits(['deleteClub','deleteFriend','confirmFriend'])
+// 刪除社團
+const removeClub = ()=>{
+  emit('deleteClub',props.clubId)
+}
+// 刪除好友
+const removeFriend = ()=>{
+  emit('deleteFriend',props.friendId)
+}
+// 確認好友
+const checkFriend = ()=>{
+  emit('confirmFriend',props.friendId)
+}
+
 
 const placeholderUrl = "https://placehold.co/32"; // 網路上的佔位圖
 </script>

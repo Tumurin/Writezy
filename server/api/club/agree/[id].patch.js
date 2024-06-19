@@ -14,7 +14,7 @@ export default defineEventHandler(async(event)=>{
         console.log(err);
         return {
             code:400,
-            message:"系統有錯，請稍後再試"
+            message:err.message
         }
     }
 })

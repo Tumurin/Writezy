@@ -16,6 +16,7 @@ export const addOneClub = async (data) => {
   const newClub = await Club.create({
     name: data.name,
     description: data.description,
+    photo:data.photo,
     members: [
       {
         id: data.id,
@@ -36,6 +37,13 @@ export const addOneClub = async (data) => {
   });
   return newClub;
 };
+// 查找所有社團中的成員裡面的社團清單並刪除
+export const deleteMembersClub = async (id,clubId)=>{
+  const findOneClub = await User.findByIdAndUpdate(id,{
+    $pull: { clubs: { id:clubId } }
+  })
+  return findOneClub
+}
 // 刪除社團
 export const deleteOneClub = async (id) => {
   const deleteClub = await Club.findByIdAndDelete(id);
@@ -52,6 +60,10 @@ export const modifyOneClub = async (id, data) => {
 // 加入社團
 export const joinOneClub = async (id, data) => {
   // id為社團id data為使用者資料
+  // 如果已經是成員就不能加入
+  // const repeat = await Club.findOne({_id:id}).select({members:{$elemMatch:{id:data.id}}})
+  // console.log(repeat.members)
+  // if(!repeat.members) return {message:"已經是社團成員了"}
   const updateMembers = await Club.findByIdAndUpdate(id, {
     $push: {
       members: {

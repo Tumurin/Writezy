@@ -77,9 +77,9 @@
       <!-- 右側資訊卡 -->
       <div class="col-lg-3">
         <div class="d-none d-lg-block">
-          <List name="好友" :items="friends" />
+          <List name="好友" :items="friends" @refresh-user="getUserInfo"/>
           <hr />
-          <List name="社團" :items="clubs" />
+          <List name="社團" :items="clubs" @refresh-user="getUserInfo"/>
         </div>
         <MessageChat class="d-none d-lg-block"></MessageChat>
       </div>
@@ -91,6 +91,9 @@
 import { useAuth } from "#imports";
 
 const myAuth = useAuth();
+const userInfo = useAuthUser();
+console.log(userInfo.value.name)
+const owner = ref('')
 definePageMeta({
   middleware: "auth",
 });
@@ -140,16 +143,50 @@ const posts = [
   { id: 2, title: "Post Title 2", content: "Post content 2" },
 ];
 // 好友列表數據
-const friends = [
-  { id: 1, avatarUrl: "https://placehold.co/32", name: "好友1" },
-  { id: 2, avatarUrl: "https://placehold.co/32", name: "好友2" },
-];
+const friends = ref([])
+// const friends = [
+//   { id: 1, avatarUrl: "https://placehold.co/32", name: "好友1" },
+//   { id: 2, avatarUrl: "https://placehold.co/32", name: "好友2" },
+// ];
 
 // 社團列表數據
-const clubs = [
-  { id: 1, avatarUrl: "https://placehold.co/32", name: "社團1" },
-  { id: 2, avatarUrl: "https://placehold.co/32", name: "社團2" },
-];
+const clubs = ref([])
+// const clubs = [
+//   { id: 1, avatarUrl: "https://placehold.co/32", name: "社團1" },
+//   { id: 2, avatarUrl: "https://placehold.co/32", name: "社團2" },
+// ];
+// 取得好友以及社團資訊
+const getUserInfo  = async ()=>{
+  try{
+        const user = await $fetch('/api/friend/owner',{
+            method: 'POST',
+            body: {email:userInfo.value.email,name:userInfo.value.name}
+        })
+        friends.value=[]
+        clubs.value=[]
+        console.log(user.data[0])
+        owner.value = {...user.data[0]}
+        console.log(owner.value)
+        owner.value.friends.forEach((item,index)=>{
+          friends.value[index] = {friendId:item.id._id,avatarUrl: "https://placehold.co/32",name:item.name,isFriend:item.status}
+        })
+        owner.value.clubs.forEach((item,index)=>{
+          let isManager
+          item.id.members.forEach((item)=>{
+            if(item.id===owner.value._id){
+              isManager = item.isManager
+            }
+          })
+          clubs.value[index] = {clubId:item.id._id,avatarUrl: "https://placehold.co/32",name:item.name,isManager:isManager}
+        })
+        console.log(clubs.value)
+    }catch(error){
+        console.log(error)
+    }
+}
+onMounted(() => {
+  getUserInfo()
+})
 </script>
 
 <style lang="scss" scoped>

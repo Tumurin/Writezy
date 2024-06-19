@@ -43,7 +43,7 @@
                           前往我的社團-六角學院</nuxt-link
                         >
                       </li>
-                      <li><a class="dropdown-item" href="#">建立新社團</a></li>
+                      <li><a class="dropdown-item" href="#" @click.prevent="openModal()">建立新社團</a></li>
                       <li><a class="dropdown-item" href="#">編輯主頁</a></li>
                       <li><a class="dropdown-item" href="#">登出</a></li>
                     </ul>
@@ -444,10 +444,148 @@
       </div>
     </div>
   </nav>
+  <!-- 社團Modal -->
+  <div
+      id="productModal"
+      ref="modalRef"
+      class="modal fade"
+      tabindex="-1"
+      aria-labelledby="productModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content border-0">
+          <div class="modal-header bg-secondary text-white">
+            <h5 id="productModalLabel" class="modal-title">
+              <span class="text-black">新增社團</span>
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="mb-2">
+                  <div class="mb-3">
+                    <h3 class="mb-3">主要圖片</h3>
+                    <label for="imageUrl" class="form-label">輸入圖片網址</label>
+                    <input
+                      id="imageUrl"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入圖片連結"
+                      v-model="clubPhoto"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">上傳檔案</label>
+                    <input class="form-control" type="file" id="formFile" ref="formFile" @change=""/>
+                  </div>
+                  <img class="img-fluid" :src="clubPhoto" alt=""/>
+                </div>
+              </div>
+              <div class="col-sm-8">
+                <div class="mb-3">
+                  <label for="title" class="form-label">社團名稱</label>
+                  <input
+                    id="title"
+                    type="text"
+                    class="form-control"
+                    placeholder="請輸入社團名稱"
+                    v-model="clubName"
+                  />
+                </div>
+  
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label for="category" class="form-label">分類</label>
+                    <input
+                      id="category"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入分類"
+                    />
+                  </div>
+                </div>
+  
+                <div class="mb-3">
+                  <label for="description" class="form-label">社團簡介</label>
+                  <textarea
+                    id="description"
+                    type="text"
+                    class="form-control"
+                    placeholder="請輸入社團簡介"
+                    v-model="clubContent"
+                  >
+                  </textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              @click="closeModal"
+            >
+              取消
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="addClub()"
+            >
+              確認
+            </button>
+          </div>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script setup>
 const userInfo = useAuthUser();
+const { $bootstrap } = useNuxtApp();
+const modalRef = ref(null)
+let modal
+const openModal = ()=>{
+  modal.show()
+}
+const closeModal = ()=>{
+  modal.hide()
+}
+// 新建社團相關參數
+const clubName = ref('')
+const clubContent = ref('')
+const clubPhoto = ref('')
+const addClub = async()=>{
+    const data = {
+        name:clubName.value,
+        description:clubContent.value,
+        photo:clubPhoto.value,
+        id:userInfo.value._id,
+        userName:userInfo.value.name
+    }
+    try{
+        const addOneClub = await $fetch(`/api/club/add`,{
+            method:'POST',
+            body:data
+        })
+        console.log(addOneClub)
+        alert("新增社團成功")
+        closeModal()
+        location.reload()
+    }catch(err){
+        console.log(err)
+    }
+}
+onMounted(() => {
+  modal = $bootstrap.modal(modalRef.value)
+})
 </script>
 
 <style lang="scss" scoped>

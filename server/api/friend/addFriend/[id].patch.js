@@ -4,6 +4,12 @@ export default defineEventHandler(async(event)=>{
     try{
         const id = event.context.params.id
         const body = await readBody(event);
+        if(id == body.id){
+            return {
+                code:400,
+                message:"不能加自己為好友"
+            }
+        }
         const updatedFriend = await addFriend(id,body)
         return {
             code:200,
@@ -14,7 +20,7 @@ export default defineEventHandler(async(event)=>{
         console.log(err);
         return {
             code:400,
-            mssage:err
+            message:err.message
         }
     }
 })

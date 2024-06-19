@@ -23,6 +23,7 @@ export const getAllUsers = async () => {
 };
 
 export const addFriend = async (id, data) => {
+  
   const updateFriend = await User.findByIdAndUpdate(id, {
     $push: {
       friends: {
@@ -70,6 +71,7 @@ export const getUser = async(data)=>{
   const owner = await User.find({
     name: data.name,
     email: data.email,
-  })
+  }).populate({path:'friends.id'})
+    .populate({path:'clubs.id'})
   return owner
 }
