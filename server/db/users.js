@@ -23,6 +23,7 @@ export const getAllUsers = async () => {
 };
 
 export const addFriend = async (id, data) => {
+
   const updateFriend = await User.findByIdAndUpdate(id, {
     $push: {
       friends: {
@@ -56,7 +57,7 @@ export const confirmFriend = async (id, data) => {
   return updateFriendStatus
 };
 
-export const deleteOneFriend = async(id,data)=>{
+export const deleteOneFriend = async (id, data) => {
   const deleteMyFriend = await User.findByIdAndUpdate(id, {
     $pull: { friends: { id: data.id } },
   });
@@ -66,7 +67,7 @@ export const deleteOneFriend = async(id,data)=>{
   return deleteMyFriend
 }
 
-export const getUser = async(data)=>{
+export const getUser = async (data) => {
   const owner = await User.find({
     name: data.name,
     email: data.email,

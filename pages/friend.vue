@@ -79,7 +79,6 @@
       </ul>
     </div>
   </div>
-  <PostFrame/>
 </template>
 <style scoped>
 .input-group {
@@ -108,8 +107,8 @@ const login = async()=>{
             method: 'POST',
             body: {email:emailInput.value,name:userName.value}
         })
-        console.log(owner.user[0])
-        thisOwner.value = {...owner.user[0]}
+        console.log(owner.data[0])
+        thisOwner.value = {...owner.data[0]}
         console.log(thisOwner.value)
         isLogin.value = true
     }catch(error){
@@ -183,6 +182,7 @@ const deleteFriend = async(oppoentId)=>{
   getAllUsers()
 }
 const filterUsers = computed(() => {
+  
   const newUsers = users.value.filter((item) => item.name.match(name.value));
   if (newUsers.length === users.value.length) return null;
   else return newUsers;
@@ -190,7 +190,7 @@ const filterUsers = computed(() => {
 const getAllUsers = async () => {
   try {
     const allUsers = await $fetch("/api/friend/all");
-    users.value = allUsers.users;
+    users.value = allUsers.data;
     console.log(users.value);
   } catch (error) {
     console.log(error);

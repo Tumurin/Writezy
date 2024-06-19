@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
         console.log(err);
         return {
             code:400,
-            message:err
+            message:err.message
         }
     }
 });
