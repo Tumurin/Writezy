@@ -13,7 +13,7 @@
       >
         <textarea v-if="onEditMode" v-model="newContent" />
         <!-- <slot v-else></slot> -->
-        <PostMarkdownRenderer :content="content"></PostMarkdownRenderer>
+        <!-- <PostMarkdownRenderer :content="content"></PostMarkdownRenderer> -->
       </div>
       <div class="col-lg-4" v-if="isImage">
         <img

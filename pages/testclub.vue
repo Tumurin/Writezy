@@ -248,6 +248,17 @@ const joinClub = async(clubId,data)=>{
   }
 
 }
+const addClubIntro = async(data)=>{
+  try{
+    const clubIntro = await $fetch(`/api/club/club-intro`,{
+      method:'POST',
+      body:data
+    })
+    return clubIntro
+  }catch(err){
+    console.log(err)
+  }
+}
 const findClub = async()=>{
   if(!isLogin.value){
     alert("請先登入")
@@ -276,6 +287,8 @@ const findClub = async()=>{
         Swal.fire({
         title: tempClub.value.name,
         text: `社團狀態：${status}`,
+        input:"textarea",
+        inputPlaceholder: '若要加社團請說明入社理由',
         icon: "info",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -284,7 +297,14 @@ const findClub = async()=>{
         cancelButtonText:"取消"
         }).then(async (result) => {
         if (result.isConfirmed) {
-            await joinClub(tempClub.value._id,{id:thisOwner.value._id,name:thisOwner.value.name})
+            const intro = await addClubIntro({content:result.value})
+            const introId = intro.data._id
+            await joinClub(tempClub.value._id,
+            {
+              id:thisOwner.value._id,
+              name:thisOwner.value.name,
+              introId:introId
+            })
             await getAllClubs()
             Swal.fire({
             title: "申請成功",

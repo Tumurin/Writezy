@@ -30,12 +30,10 @@
             <hr />
           </div>
           <div class="container">
-            <ItemsApplyForm class="mb-3" />
-            <ItemsApplyForm class="mb-3" />
-            <ItemsApplyForm class="mb-3" />
+            <ItemsApplyForm class="mb-3" v-for="item in filterMembers" :wait-member="item" :club-id="clubId" @refresh-members="refreshMembers"/>
             <div class="d-flex justify-content-end">
-              <button type="button" class="refuse-all me-3" @click.prevent="closeModal">全部拒絕</button>
-              <button type="button" class="agree-all text-white">
+              <button type="button" class="refuse-all me-3" @click="denyAll">全部拒絕</button>
+              <button type="button" class="agree-all text-white" @click="agreeAll">
                 全部同意
               </button>
             </div>
@@ -47,7 +45,48 @@
 </template>
 <script setup>
 const { $bootstrap } = useNuxtApp();
-import { ref,onMounted } from "vue";
+const props = defineProps(['clubMembers','clubId'])
+const emits = defineEmits(['refreshMembers'])
+const refreshMembers = ()=>{
+  emits('refreshMembers')
+}
+const {clubMembers,clubId} = toRefs(props)
+const filterMembers = computed(()=>{
+  const waitList = clubMembers.value.filter((item)=>item.status === false)
+  return waitList
+})
+console.log(filterMembers.value)
+const agreeAll = async()=>{
+  filterMembers.value.forEach(async(item)=>{
+    try{
+    const agree = await $fetch(`/api/club/agree/${item.id}`,{
+      method:'PATCH',
+      body:{id:clubId.value}
+    })
+    console.log(agree)
+    refreshMembers()
+    closeModal()
+  }catch(err){
+    console.log(err)
+  }
+  })
+}
+const denyAll = async()=>{
+  filterMembers.value.forEach(async(item)=>{
+    try{
+      const deny = await $fetch(`/api/club/kick/${item.id}`,{
+        method:'PATCH',
+        body:{id:clubId.value,clubIntroId:item.introduction._id}
+      })
+      refreshMembers()
+      console.log(deny)
+      closeModal()
+    }catch(err){
+      console.log(err)
+    }
+  })
+}
+console.log(filterMembers)
 let myModal;
 const modal = ref(null);
 const showModal = () => {

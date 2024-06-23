@@ -487,6 +487,24 @@
                   </div>
                   <img class="img-fluid" :src="clubPhoto" alt=""/>
                 </div>
+                <div class="mb-2">
+                  <div class="mb-3">
+                    <h3 class="mb-3">橫幅圖片</h3>
+                    <label for="imageUrl" class="form-label">輸入圖片網址</label>
+                    <input
+                      id="imageUrl"
+                      type="text"
+                      class="form-control"
+                      placeholder="請輸入圖片連結"
+                      v-model="bannerPhoto"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">上傳檔案</label>
+                    <input class="form-control" type="file" id="formFile" ref="formFile" @change=""/>
+                  </div>
+                  <img class="img-fluid" :src="bannerPhoto" alt=""/>
+                </div>
               </div>
               <div class="col-sm-8">
                 <div class="mb-3">
@@ -550,6 +568,7 @@
 <script setup>
 const userInfo = useAuthUser();
 const { $bootstrap } = useNuxtApp();
+const router = useRouter()
 const modalRef = ref(null)
 let modal
 const openModal = ()=>{
@@ -562,11 +581,13 @@ const closeModal = ()=>{
 const clubName = ref('')
 const clubContent = ref('')
 const clubPhoto = ref('')
+const bannerPhoto = ref('')
 const addClub = async()=>{
     const data = {
         name:clubName.value,
         description:clubContent.value,
         photo:clubPhoto.value,
+        bannerPhoto:bannerPhoto.value,
         id:userInfo.value._id,
         userName:userInfo.value.name
     }
@@ -576,9 +597,14 @@ const addClub = async()=>{
             body:data
         })
         console.log(addOneClub)
+        const clubId = addOneClub.data._id
         alert("新增社團成功")
         closeModal()
-        location.reload()
+        clubName.value = null
+        clubPhoto.value =null
+        clubContent.value = null
+        bannerPhoto.value = null
+        router.push(`/club?id=${clubId}`)
     }catch(err){
         console.log(err)
     }

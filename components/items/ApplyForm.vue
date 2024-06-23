@@ -9,29 +9,57 @@
         <div class="col-md-3 d-flex align-items-center">
           <div class="avatar rounded-circle"></div>
           <div class="ms-3 row">
-            <span class="name d-block">林小明</span>
-            <span class="nick-name d-block">稱號</span>
+            <span class="name d-block">{{ waitMember.name }}</span>
           </div>
         </div>
         <div class="col-md-7 mt-3 mt-md-0">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident
-          aperiam consequuntur sit beatae id fuga. Minima voluptatibus minus
-          sapiente quae aliquid quis. Perspiciatis deserunt culpa soluta sit
-          esse incidunt iste.
+          {{waitMember.introduction.content}}
         </div>
         <div class="col-md-2 d-flex justify-content-evenly mt-md-0 mt-3">
-            <span>拒絕</span>
-            <span>同意</span>
+            <a href="#" class="text-black text-decoration-none" @click.prevent="denyMember">拒絕</a>
+            <a href="#" class="text-black text-decoration-none" @click.prevent="agreeMember">同意</a>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script setup>
+const props = defineProps(['waitMember','clubId'])
+const emits = defineEmits(['refreshMembers'])
+const { waitMember,clubId } = toRefs(props)
+console.log(waitMember.value.id)
+const introId = waitMember.value.introduction._id
+const agreeMember = async()=>{
+  try{
+    const agree = await $fetch(`/api/club/agree/${waitMember.value.id}`,{
+      method:'PATCH',
+      body:{id:clubId.value}
+    })
+    refreshMembers()
+    console.log(agree)
+  }catch(err){
+    console.log(err)
+  }
+}
+const denyMember = async ()=>{
+  try{
+    const deny = await $fetch(`/api/club/kick/${waitMember.value.id}`,{
+      method:'PATCH',
+      body:{id:clubId.value,clubIntroId:introId}
+    })
+    refreshMembers()
+    console.log(deny)
+  }catch(err){
+    console.log(err)
+  }
+}
+const refreshMembers = ()=>{
+  emits('refreshMembers')
+}
+</script>
 <style scoped>
 .content-frame {
   width: 100%;
-}
-.avatar-name {
 }
 .avatar {
   width: 40px;

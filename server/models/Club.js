@@ -20,12 +20,17 @@ const ClubSchema = new Schema({
     type:String,
     required:true
   },
+  bannerPhoto:{
+    type:String,
+    required:true
+  },
   members: [
     {
       id: {type:Schema.Types.ObjectId,ref:'User'},
       name: String,
       status: { type: Boolean, default: false }, // 預設未取得社團同意 
       isManager: { type: Boolean, default: false }, // 是否為管理者
+      introduction:{type:Schema.Types.ObjectId,ref:'ClubIntro'}
     }
   ]
 },

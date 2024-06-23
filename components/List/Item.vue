@@ -25,14 +25,17 @@
           <a class="dropdown-item" href="#" v-else-if="isFriend" @click.prevent="removeFriend">刪除好友</a>
           <a class="dropdown-item" href="#" v-else-if="!isFriend" @click.prevent="checkFriend">確認好友</a>
         </li>
-        <li><a class="dropdown-item" href="#">功能2</a></li>
-        <li><a class="dropdown-item" href="#">功能3</a></li>
+        <li>
+          <a class="dropdown-item" href="#" v-if="clubId" @click.prevent="jumpToClub">進入社團</a>
+        </li>
+        <li><a class="dropdown-item" href="#" v-if="friendId">聊天</a></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup>
+const router = useRouter()
 // 接收好友頭像和名稱作為屬性
 const props = defineProps({
   avatarUrl: {
@@ -69,6 +72,10 @@ const removeFriend = ()=>{
 // 確認好友
 const checkFriend = ()=>{
   emit('confirmFriend',props.friendId)
+}
+// 跳轉社團頁面
+const jumpToClub = ()=>{
+  router.push({ name: 'club', query: { id: props.clubId} })
 }
 
 
