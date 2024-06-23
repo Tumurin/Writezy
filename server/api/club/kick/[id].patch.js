@@ -1,10 +1,11 @@
-import { removeOneMember} from "~/server/db/club"
+import { removeOneMember,deleteClubIntro} from "~/server/db/club"
 
 export default defineEventHandler(async(event)=>{
     try{
         const id = event.context.params.id
         const body = await readBody(event);
-        const club = await removeOneMember(id,body)
+        const club = await removeOneMember(id,body.id)
+        const clubIntro = await deleteClubIntro(body.clubIntroId)
         return {
             code:200,
             data:club,

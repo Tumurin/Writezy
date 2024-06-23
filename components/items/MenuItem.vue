@@ -10,13 +10,17 @@
       >
         <div class="avatar rounded-circle me-2"></div>
         <div>
-          <span class="name d-block">林小明</span>
-          <span class="nick-name d-block">稱號</span>
+          <span class="name d-block">{{ name }}</span>
+          <!-- <span class="nick-name d-block">稱號</span> -->
         </div>
       </div>
     </div>
   </div>
 </template>
+<script setup>
+const props = defineProps(['name'])
+const {name} = toRefs(props)
+</script>
 <style scoped>
 .frame {
   max-width: 500px;

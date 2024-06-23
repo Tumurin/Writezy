@@ -4,7 +4,7 @@
             <div class="avatar-name d-flex justify-content-between align-items-center">
                 <div class="avatar rounded-circle"></div>
                 <div>
-                    <span class="name d-block">林小明</span>
+                    <span class="name d-block">{{ name }}</span>
                     <span class="nick-name d-block">稱號</span>
                 </div>
             </div>
@@ -15,9 +15,13 @@
     </div>
 </template>
 <script setup>
-const emits = defineEmits(['deleteConfirm'])
+const emits = defineEmits(['deleteConfirm','openModal'])
+const props = defineProps(['name','userId'])
+const {name,userId} = toRefs(props)
+const userInfo = {name:name.value,userId:userId.value}
+console.log(userInfo)
 const openModal = ()=>{
-    emits('deleteConfirm')
+    emits('openModal',userInfo)
 }
 </script>
 <style scoped>

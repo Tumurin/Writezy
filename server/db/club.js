@@ -1,5 +1,6 @@
 import { Club } from "~/server/models/Club";
 import { User } from "~/server/models/User";
+import { ClubIntro } from "~/server/models/ClubIntro";
 
 // 查找所有社團
 export const getAllClubs = async () => {
@@ -8,7 +9,7 @@ export const getAllClubs = async () => {
 };
 // 查找單一社團
 export const findOneClub = async (id) => {
-  const club = await Club.findById(id); //社團id
+  const club = await Club.findById(id).populate({path:'members.introduction',select:'content'}) //社團id
   return club;
 };
 // 新增社團
@@ -17,6 +18,7 @@ export const addOneClub = async (data) => {
     name: data.name,
     description: data.description,
     photo:data.photo,
+    bannerPhoto:data.bannerPhoto,
     members: [
       {
         id: data.id,
@@ -54,6 +56,8 @@ export const modifyOneClub = async (id, data) => {
   const updateClub = await Club.findByIdAndUpdate(id, {
     name: data.name,
     description: data.description,
+    photo:data.photo,
+    bannerPhoto:data.bannerPhoto
   });
   return updateClub;
 };
@@ -71,6 +75,7 @@ export const joinOneClub = async (id, data) => {
         name: data.name,
         status: false,
         isManager: false,
+        introduction:data.introId
       },
     },
   });
@@ -101,13 +106,13 @@ export const agreeWithClub = async (id, data) => {
   return updateMember;
 };
 // 刪除社團成員
-export const removeOneMember = async (id, data) => {
-  // id為使用者資訊，data為社團資訊
-  const deleteClubMember = await Club.findByIdAndUpdate(data.id, {
+export const removeOneMember = async (id, clubId) => {
+  // id為使用者資訊，clubId為社團資訊
+  const deleteClubMember = await Club.findByIdAndUpdate(clubId, {
     $pull: { members: { id: id } },
   });
   await User.findByIdAndUpdate(id, {
-    $pull: { clubs: { id: data.id } },
+    $pull: { clubs: { id: clubId } },
   });
   return deleteClubMember;
 };
@@ -159,3 +164,16 @@ export const removeOneManager = async (id, data) => {
   });
   return updateMember
 };
+// 入社理由
+export const clubIntroduction = async (data)=>{
+  const introduction = await ClubIntro.create({
+    content:data.content,
+    author:data.id
+  })
+  return introduction
+}
+// 刪除入社理由
+export const deleteClubIntro = async (id)=>{
+  const intro = await ClubIntro.findByIdAndDelete(id)
+  return intro
+}
